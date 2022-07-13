@@ -15,3 +15,14 @@ On each dataset, we provide
   * Python for conala
 3. Oracle docs (entry `oracle_man`) 
   * In the data files, we only provide the manual ids, their contents could be found in the `{tldr, conala}_docs.json` of `docs.zip`.
+
+## Resources 
+* [tldr](https://github.com/tldr-pages/tldr) github repo
+* [conla](https://conala-corpus.github.io)
+
+## Citation
+@article{zhou22doccoder,
+    title = {DocCoder: Generating Code by Retrieving and Reading Code Docs},
+    author = {Shuyan Zhou and Uri Alon and Frank F. Xu and Zhengbao Jiang and Graham Neubig},
+    year = {2022}
+}
