@@ -14,4 +14,4 @@ On each dataset, we provide
   * Bash for tldr
   * Python for conala
 3. Oracle docs (entry `oracle_man`) 
-  * In the data files, we only provide the manual ids, their contents could be found in the `docs.json` file in each dataset 
+  * In the data files, we only provide the manual ids, their contents could be found in the `{tldr, conala}_docs.json` of `docs.zip`.
