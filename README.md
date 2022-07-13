@@ -21,8 +21,10 @@ On each dataset, we provide
 * [conla](https://conala-corpus.github.io)
 
 ## Citation
+```
 @article{zhou22doccoder,
     title = {DocCoder: Generating Code by Retrieving and Reading Code Docs},
     author = {Shuyan Zhou and Uri Alon and Frank F. Xu and Zhengbao Jiang and Graham Neubig},
     year = {2022}
 }
+```
