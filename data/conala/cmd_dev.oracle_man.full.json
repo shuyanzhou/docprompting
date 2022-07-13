@@ -1,0 +1,2377 @@
+[
+  {
+    "nl": "Get pandas GroupBy object with sum over the rows with same column names within  dataframe `df`",
+    "cmd": "df.groupby(df.columns, axis=1).sum()",
+    "question_id": "13078751-34",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.groupby",
+      "python.library.functions#sum"
+    ],
+    "clean_cmd": "df.groupby(df.columns, axis=).sum()",
+    "canonical_cmd": "VAR_STR.groupby(VAR_STR.columns, axis=1).sum()"
+  },
+  {
+    "nl": "divide the value for each key `k` in dict `d2` by the value for the same key `k` in dict `d1`",
+    "cmd": "{k: (d2[k] / d1[k]) for k in list(d1.keys()) & d2}",
+    "question_id": "11840111-76",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#list",
+      "python.library.stdtypes#dict.keys"
+    ],
+    "clean_cmd": "{k: (d2[k] / d1[k])  k  list(d1.keys()) &amp; d2}",
+    "canonical_cmd": "{VAR_STR: (VAR_STR[VAR_STR] / VAR_STR[VAR_STR]) for VAR_STR in list(VAR_STR.keys()) & VAR_STR}"
+  },
+  {
+    "nl": "combining rows in pandas by adding their values",
+    "cmd": "df.groupby(df.index).sum()",
+    "question_id": "17438906-51",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.groupby",
+      "python.library.functions#sum"
+    ],
+    "clean_cmd": "df.groupby(df.index).sum()",
+    "canonical_cmd": "df.groupby(df.index).sum()"
+  },
+  {
+    "nl": "make all keys lowercase in dictionary `d`",
+    "cmd": "d = {(a.lower(), b): v for (a, b), v in list(d.items())}",
+    "question_id": "21833383-37",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#list",
+      "python.library.stdtypes#str.lower",
+      "python.library.stdtypes#dict.items"
+    ],
+    "clean_cmd": "d = {(a.lower(), b): v  (a, b), v  list(d.items())}",
+    "canonical_cmd": "VAR_STR = {(a.lower(), b): v for (a, b), v in list(VAR_STR.items())}"
+  },
+  {
+    "nl": "create a dataframe `d` filled with zeros with indices from 0 to length of `data` and column names from `feature_list`",
+    "cmd": "d = pd.DataFrame(0, index=np.arange(len(data)), columns=feature_list)",
+    "question_id": "22963263-45",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.arange",
+      "python.library.functions#len",
+      "pandas.reference.api.pandas.dataframe"
+    ],
+    "clean_cmd": "d = pd.DataFrame(, index=np.arange(len(data)), columns=feature_list)",
+    "canonical_cmd": "VAR_STR = pd.DataFrame(0, index=np.arange(len(VAR_STR)), columns=VAR_STR)"
+  },
+  {
+    "nl": "get a dict of variable names `['some', 'list', 'of', 'vars']` as a string and their values",
+    "cmd": "dict((name, eval(name)) for name in ['some', 'list', 'of', 'vars'])",
+    "question_id": "2553354-9",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#eval",
+      "python.library.stdtypes#dict"
+    ],
+    "clean_cmd": "dict((name, eval(name))  name  [, , , ])",
+    "canonical_cmd": "dict((name, eval(name)) for name in [VAR_STR])"
+  },
+  {
+    "nl": "Format a date object `str_data` into iso fomrat",
+    "cmd": "datetime.datetime.strptime(str_date, '%m/%d/%Y').date().isoformat()",
+    "question_id": "12772057-25",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.strptime",
+      "python.library.datetime#datetime.date.isoformat",
+      "python.library.datetime#datetime.datetime.date"
+    ],
+    "clean_cmd": "datetime.datetime.strptime(str_date, ).date().isoformat()",
+    "canonical_cmd": "datetime.datetime.strptime(str_date, '%m/%d/%Y').date().isoformat()"
+  },
+  {
+    "nl": "sort dictionary `mydict` in descending order based on the sum of each value in it",
+    "cmd": "sorted(iter(mydict.items()), key=lambda tup: sum(tup[1]), reverse=True)[:3]",
+    "question_id": "3411025-33",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#sorted",
+      "python.library.functions#iter",
+      "python.library.functions#sum",
+      "python.library.stdtypes#dict.items"
+    ],
+    "clean_cmd": "sorted(iter(mydict.items()), key= tup: sum(tup[]), reverse=True)[:]",
+    "canonical_cmd": "sorted(iter(VAR_STR.items()), key=lambda tup: sum(tup[1]), reverse=True)[:3]"
+  },
+  {
+    "nl": "get top `3` items from a dictionary `mydict` with largest sum of values",
+    "cmd": "heapq.nlargest(3, iter(mydict.items()), key=lambda tup: sum(tup[1]))",
+    "question_id": "3411025-3",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.heapq#heapq.nlargest",
+      "python.library.functions#iter",
+      "python.library.functions#sum",
+      "python.library.stdtypes#dict.items"
+    ],
+    "clean_cmd": "heapq.nlargest(, iter(mydict.items()), key= tup: sum(tup[]))",
+    "canonical_cmd": "heapq.nlargest(3, iter(VAR_STR.items()), key=lambda tup: sum(tup[1]))"
+  },
+  {
+    "nl": "calculate the md5 checksum of a file named  'filename.exe'",
+    "cmd": "hashlib.md5(open('filename.exe', 'rb').read()).hexdigest()",
+    "question_id": "16874598-40",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.urllib.request#open",
+      "python.library.hashlib#hashlib.hash.hexdigest",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "hashlib.md5(open(, ).read()).hexdigest()",
+    "canonical_cmd": "hashlib.md5(open('VAR_STR', 'rb').read()).hexdigest()"
+  },
+  {
+    "nl": "get max key in dictionary `MyCount`",
+    "cmd": "max(list(MyCount.keys()), key=int)",
+    "question_id": "3108042-55",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#max",
+      "python.library.functions#list",
+      "python.library.stdtypes#dict.keys"
+    ],
+    "clean_cmd": "max(list(MyCount.keys()), key=int)",
+    "canonical_cmd": "max(list(VAR_STR.keys()), key=int)"
+  },
+  {
+    "nl": "return a string from a regex match with pattern '<img.*?>' in string 'line'",
+    "cmd": "imtag = re.match('<img.*?>', line).group(0)",
+    "question_id": "18493677-21",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.re#re.match",
+      "python.library.re#re.Match.group"
+    ],
+    "clean_cmd": "imtag = re.match(, line).group()",
+    "canonical_cmd": "imtag = re.match('VAR_STR', VAR_STR).group(0)"
+  },
+  {
+    "nl": "In Django, filter `Task.objects` based on all entities in ['A', 'P', 'F']",
+    "cmd": "Task.objects.exclude(prerequisites__status__in=['A', 'P', 'F'])",
+    "question_id": "1516795-1",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "django.ref.contrib.admin.index#django.contrib.admin.ModelAdmin.exclude"
+    ],
+    "clean_cmd": "Task.objects.exclude(prerequisites__status__in=[, , ])",
+    "canonical_cmd": "Task.objects.exclude(prerequisites__status__in=['VAR_STR', 'VAR_STR', 'VAR_STR'])"
+  },
+  {
+    "nl": "remove duplicated items from list of lists `testdata`",
+    "cmd": "list(map(list, set(map(lambda i: tuple(i), testdata))))",
+    "question_id": "3724551-76",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#map",
+      "python.library.functions#list",
+      "python.library.functions#tuple",
+      "python.library.stdtypes#set"
+    ],
+    "clean_cmd": "list(map(list, set(map( i: tuple(i), testdata))))",
+    "canonical_cmd": "list(map(list, set(map(lambda i: tuple(i), VAR_STR))))"
+  },
+  {
+    "nl": "uniqueness for list of lists `testdata`",
+    "cmd": "[list(i) for i in set(tuple(i) for i in testdata)]",
+    "question_id": "3724551-76",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#map",
+      "python.library.functions#list",
+      "python.library.functions#tuple",
+      "python.library.stdtypes#set"
+    ],
+    "clean_cmd": "[list(i)  i  set(tuple(i)  i  testdata)]",
+    "canonical_cmd": "[list(i) for i in set(tuple(i) for i in VAR_STR)]"
+  },
+  {
+    "nl": "download file from http url `file_url`",
+    "cmd": "file_name = wget.download(file_url)",
+    "question_id": "19602931-66",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib.backend_webagg_api#matplotlib.backends.backend_webagg.WebAggApplication.Download"
+    ],
+    "clean_cmd": "file_name = wget.download(file_url)",
+    "canonical_cmd": "file_name = wget.download(VAR_STR)"
+  },
+  {
+    "nl": "produce a pivot table as dataframe using column 'Y' in datafram `df` to form the axes of the resulting dataframe",
+    "cmd": "df.pivot_table('Y', rows='X', cols='X2')",
+    "question_id": "9550867-20",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.pivot_table"
+    ],
+    "clean_cmd": "df.pivot_table(, rows=, cols=)",
+    "canonical_cmd": "VAR_STR.pivot_table('VAR_STR', rows='X', cols='X2')"
+  },
+  {
+    "nl": "remove duplicate dict in list `l`",
+    "cmd": "[dict(t) for t in set([tuple(d.items()) for d in l])]",
+    "question_id": "9427163-45",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#tuple",
+      "python.library.stdtypes#dict",
+      "python.library.stdtypes#set",
+      "python.library.stdtypes#dict.items"
+    ],
+    "clean_cmd": "[dict(t)  t  set([tuple(d.items())  d  l])]",
+    "canonical_cmd": "[dict(t) for t in set([tuple(d.items()) for d in VAR_STR])]"
+  },
+  {
+    "nl": "request url 'https://www.reporo.com/' without verifying SSL certificates",
+    "cmd": "requests.get('https://www.reporo.com/', verify=False)",
+    "question_id": "28667684-80",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.webbrowser#webbrowser.get"
+    ],
+    "clean_cmd": "requests.get(, verify=False)",
+    "canonical_cmd": "requests.get('VAR_STR', verify=False)"
+  },
+  {
+    "nl": "Filter queryset for all objects in Django model `MyModel` where texts length are greater than `254`",
+    "cmd": "MyModel.objects.filter(text__regex='^.{254}.*')",
+    "question_id": "23351183-55",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.logging#logging.Filter.filter"
+    ],
+    "clean_cmd": "MyModel.objects.filter(text__regex=)",
+    "canonical_cmd": "VAR_STR.objects.filter(text__regex='^.{254}.*')"
+  },
+  {
+    "nl": "Get value for  \"username\" parameter in GET request  in Django",
+    "cmd": "request.GET.get('username', '')",
+    "question_id": "23531030-8",
+    "cmd_name": "conala",
+    "oracle_man": [],
+    "clean_cmd": "request.GET.get(, )",
+    "canonical_cmd": "request.GET.get('VAR_STR', '')"
+  },
+  {
+    "nl": "convert binary string '\\x00\\x00\\x80?\\x00\\x00\\x00@\\x00\\x00@@\\x00\\x00\\x80@' to numpy array",
+    "cmd": "np.fromstring('\\x00\\x00\\x80?\\x00\\x00\\x00@\\x00\\x00@@\\x00\\x00\\x80@', dtype='<f4')",
+    "question_id": "11760095-62",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.fromstring"
+    ],
+    "clean_cmd": "np.fromstring(, dtype=)",
+    "canonical_cmd": "np.fromstring('VAR_STR', dtype='<f4')"
+  },
+  {
+    "nl": "convert binary string to numpy array",
+    "cmd": "np.fromstring('\\x00\\x00\\x80?\\x00\\x00\\x00@\\x00\\x00@@\\x00\\x00\\x80@', dtype='>f4')",
+    "question_id": "11760095-48",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.fromstring"
+    ],
+    "clean_cmd": "np.fromstring(, dtype=)",
+    "canonical_cmd": "np.fromstring('\\x00\\x00\\x80?\\x00\\x00\\x00@\\x00\\x00@@\\x00\\x00\\x80@', dtype='>f4')"
+  },
+  {
+    "nl": "convert a pandas `df1` groupby object to dataframe",
+    "cmd": "DataFrame({'count': df1.groupby(['Name', 'City']).size()}).reset_index()",
+    "question_id": "10373660-65",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.reset_index",
+      "pandas.reference.api.pandas.core.groupby.groupby.size",
+      "pandas.reference.api.pandas.dataframe.groupby"
+    ],
+    "clean_cmd": "DataFrame({: df1.groupby([, ]).size()}).reset_index()",
+    "canonical_cmd": "DataFrame({'count': VAR_STR.groupby(['Name', 'City']).size()}).reset_index()"
+  },
+  {
+    "nl": "lowercase keys and values in dictionary `{'My Key': 'My Value'}`",
+    "cmd": "{k.lower(): v.lower() for k, v in list({'My Key': 'My Value'}.items())}",
+    "question_id": "764235-66",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#list",
+      "python.library.stdtypes#str.lower",
+      "python.library.stdtypes#dict.items"
+    ],
+    "clean_cmd": "{k.lower(): v.lower()  k, v  list({: }.items())}",
+    "canonical_cmd": "{k.lower(): v.lower() for k, v in list({VAR_STR}.items())}"
+  },
+  {
+    "nl": "lowercase all keys and values in dictionary `{'My Key': 'My Value'}`",
+    "cmd": "dict((k.lower(), v) for k, v in {'My Key': 'My Value'}.items())",
+    "question_id": "764235-57",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict",
+      "python.library.stdtypes#dict.items",
+      "python.library.stdtypes#str.lower"
+    ],
+    "clean_cmd": "dict((k.lower(), v)  k, v  {: }.items())",
+    "canonical_cmd": "dict((k.lower(), v) for k, v in {VAR_STR}.items())"
+  },
+  {
+    "nl": "Convert each key,value pair in a dictionary `{'My Key': 'My Value'}` to lowercase",
+    "cmd": "dict((k.lower(), v.lower()) for k, v in {'My Key': 'My Value'}.items())",
+    "question_id": "764235-84",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict",
+      "python.library.stdtypes#str.lower",
+      "python.library.stdtypes#dict.items"
+    ],
+    "clean_cmd": "dict((k.lower(), v.lower())  k, v  {: }.items())",
+    "canonical_cmd": "dict((k.lower(), v.lower()) for k, v in {VAR_STR}.items())"
+  },
+  {
+    "nl": "get logical xor of `a` and `b`",
+    "cmd": "(bool(a) != bool(b))",
+    "question_id": "432842-98",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#bool"
+    ],
+    "clean_cmd": "(bool(a) != bool(b))",
+    "canonical_cmd": "bool(VAR_STR) != bool(VAR_STR)"
+  },
+  {
+    "nl": "get logical xor of `a` and `b`",
+    "cmd": "(bool(a) ^ bool(b))",
+    "question_id": "432842-64",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#bool"
+    ],
+    "clean_cmd": "(bool(a) ^ bool(b))",
+    "canonical_cmd": "bool(VAR_STR) ^ bool(VAR_STR)"
+  },
+  {
+    "nl": "get logical xor of `a` and `b`",
+    "cmd": "xor(bool(a), bool(b))",
+    "question_id": "432842-23",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#bool",
+      "python.library.operator#operator.xor"
+    ],
+    "clean_cmd": "xor(bool(a), bool(b))",
+    "canonical_cmd": "xor(bool(VAR_STR), bool(VAR_STR))"
+  },
+  {
+    "nl": "get the logical xor of two variables `str1` and `str2`",
+    "cmd": "return (bool(str1) ^ bool(str2))",
+    "question_id": "432842-18",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#bool"
+    ],
+    "clean_cmd": " (bool(str1) ^ bool(str2))",
+    "canonical_cmd": "return bool(VAR_STR) ^ bool(VAR_STR)"
+  },
+  {
+    "nl": "Django check if an object with criteria `name` equal to 'name' and criteria `title` equal to 'title' exists in model `Entry`",
+    "cmd": "Entry.objects.filter(name='name', title='title').exists()",
+    "question_id": "9561243-18",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.logging#logging.Filter.filter",
+      "python.library.zipfile#zipfile.Path.exists"
+    ],
+    "clean_cmd": "Entry.objects.filter(name=, title=).exists()",
+    "canonical_cmd": "VAR_STR.objects.filter(VAR_STR='VAR_STR', VAR_STR='VAR_STR').exists()"
+  },
+  {
+    "nl": "get the date 6 months from today",
+    "cmd": "six_months = (date.today() + relativedelta(months=(+ 6)))",
+    "question_id": "546321-38",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.date.today",
+      "matplotlib.dates_api#matplotlib.dates.relativedelta"
+    ],
+    "clean_cmd": "six_months = (date.today() + relativedelta(months=(+ )))",
+    "canonical_cmd": "six_months = date.today() + relativedelta(months=+6)"
+  },
+  {
+    "nl": "calculate the date six months from the current date",
+    "cmd": "print((datetime.date.today() + datetime.timedelta(((6 * 365) / 12))).isoformat())",
+    "question_id": "546321-69",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.date.today",
+      "python.library.datetime#datetime.timedelta",
+      "python.library.datetime#datetime.date.isoformat"
+    ],
+    "clean_cmd": "print((datetime.date.today() + datetime.timedelta((( * ) / ))).isoformat())",
+    "canonical_cmd": "print((datetime.date.today() + datetime.timedelta(6 * 365 / 12)).isoformat())"
+  },
+  {
+    "nl": "apply itertools.product to elements of a list of lists `arrays`",
+    "cmd": "list(itertools.product(*arrays))",
+    "question_id": "3034014-76",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.itertools#itertools.product",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "list(itertools.product(*arrays))",
+    "canonical_cmd": "list(itertools.product(*VAR_STR))"
+  },
+  {
+    "nl": "call a Python script \"test2.py\"",
+    "cmd": "exec(compile(open('test2.py').read(), 'test2.py', 'exec'))",
+    "question_id": "1186789-17",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#exec",
+      "python.library.functions#compile",
+      "python.library.urllib.request#open",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "exec(compile(open().read(), , ))",
+    "canonical_cmd": "exec(compile(open('VAR_STR').read(), 'VAR_STR', 'exec'))"
+  },
+  {
+    "nl": "filter dataframe `df` by sub-level index '0630' in pandas",
+    "cmd": "df[df.index.map(lambda x: x[1].endswith('0630'))]",
+    "question_id": "12224778-99",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.index.map",
+      "pandas.reference.api.pandas.series.str.endswith"
+    ],
+    "clean_cmd": "df[df.index.map( x: x[].endswith())]",
+    "canonical_cmd": "VAR_STR[VAR_STR.index.map(lambda x: x[1].endswith('VAR_STR'))]"
+  },
+  {
+    "nl": "evaluate the expression '20<30'",
+    "cmd": "eval('20<30')",
+    "question_id": "10586778-60",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#eval"
+    ],
+    "clean_cmd": "eval()",
+    "canonical_cmd": "eval('VAR_STR')"
+  },
+  {
+    "nl": "Load the url `http://www.google.com` in selenium webdriver `driver`",
+    "cmd": "driver.get('http://www.google.com')",
+    "question_id": "4618373-40",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.webbrowser#webbrowser.get"
+    ],
+    "clean_cmd": "driver.get()",
+    "canonical_cmd": "VAR_STR.get('VAR_STR')"
+  },
+  {
+    "nl": "convert a 3d array `img` of dimensions 4x2x3 to a 2d array   of dimensions 3x8",
+    "cmd": "img.transpose(2, 0, 1).reshape(3, -1)",
+    "question_id": "32838802-21",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.reshape",
+      "numpy.reference.generated.numpy.transpose"
+    ],
+    "clean_cmd": "img.transpose(, , ).reshape(, -)",
+    "canonical_cmd": "VAR_STR.transpose(2, 0, 1).reshape(3, -1)"
+  },
+  {
+    "nl": "close the window in tkinter",
+    "cmd": "self.root.destroy()",
+    "question_id": "8009176-56",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib.backend_tools_api#matplotlib.backend_tools.ToolBase.destroy"
+    ],
+    "clean_cmd": "self.root.destroy()",
+    "canonical_cmd": "self.root.destroy()"
+  },
+  {
+    "nl": "format datetime in `dt` as string in format `'%m/%d/%Y`",
+    "cmd": "dt.strftime('%m/%d/%Y')",
+    "question_id": "10624937-25",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.series.dt.strftime"
+    ],
+    "clean_cmd": "dt.strftime()",
+    "canonical_cmd": "VAR_STR.strftime('%m/%d/%Y')"
+  },
+  {
+    "nl": "concatenate a list of numpy arrays `input_list` together into a flattened list of values",
+    "cmd": "np.concatenate(input_list).ravel().tolist()",
+    "question_id": "33711985-27",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.concatenate",
+      "numpy.reference.generated.numpy.ravel",
+      "numpy.reference.generated.numpy.recarray.tolist"
+    ],
+    "clean_cmd": "np.concatenate(input_list).ravel().tolist()",
+    "canonical_cmd": "np.concatenate(VAR_STR).ravel().tolist()"
+  },
+  {
+    "nl": "set an array of unicode characters `[u'\\xe9', u'\\xe3', u'\\xe2']` as labels in Matplotlib `ax`",
+    "cmd": "ax.set_yticklabels(['\\xe9', '\\xe3', '\\xe2'])",
+    "question_id": "2406700-79",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib._as_gen.matplotlib.axes.axes.set_yticklabels"
+    ],
+    "clean_cmd": "ax.set_yticklabels([, , ])",
+    "canonical_cmd": "VAR_STR.set_yticklabels(['\u00e9', '\u00e3', '\u00e2'])"
+  },
+  {
+    "nl": "find all files with extension '.c' in directory `folder`",
+    "cmd": "results += [each for each in os.listdir(folder) if each.endswith('.c')]",
+    "question_id": "3608411-24",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.listdir",
+      "python.library.stdtypes#str.endswith"
+    ],
+    "clean_cmd": "results += [each  each  os.listdir(folder)  each.endswith()]",
+    "canonical_cmd": "results += [each for each in os.listdir(VAR_STR) if each.endswith('VAR_STR')]"
+  },
+  {
+    "nl": "check if a local variable `myVar` exists",
+    "cmd": "('myVar' in locals())",
+    "question_id": "843277-82",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#locals"
+    ],
+    "clean_cmd": "(  locals())",
+    "canonical_cmd": "'VAR_STR' in locals()"
+  },
+  {
+    "nl": "check if a global variable `myVar` exists",
+    "cmd": "('myVar' in globals())",
+    "question_id": "843277-28",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#globals"
+    ],
+    "clean_cmd": "(  globals())",
+    "canonical_cmd": "'VAR_STR' in globals()"
+  },
+  {
+    "nl": "check if a local variable 'myVar' exists",
+    "cmd": "if ('myVar' in locals()):\n    pass",
+    "question_id": "843277-2",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#locals"
+    ],
+    "clean_cmd": " (  locals()):",
+    "canonical_cmd": "if 'VAR_STR' in locals():\n    pass"
+  },
+  {
+    "nl": "check if a global variable 'myVar' exists",
+    "cmd": "if ('myVar' in globals()):\n    pass",
+    "question_id": "843277-2",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#locals"
+    ],
+    "clean_cmd": " (  globals()):",
+    "canonical_cmd": "if 'VAR_STR' in globals():\n    pass"
+  },
+  {
+    "nl": "get a list of tuples of every three consecutive items in list `[1, 2, 3, 4, 5, 6, 7, 8, 9]`",
+    "cmd": "list(zip(*((iter([1, 2, 3, 4, 5, 6, 7, 8, 9]),) * 3)))",
+    "question_id": "2231663-1",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#zip",
+      "python.library.functions#iter",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "list(zip(*((iter([, , , , , , , , ]),) * )))",
+    "canonical_cmd": "list(zip(*((iter([VAR_STR]),) * 3)))"
+  },
+  {
+    "nl": "read an excel file 'ComponentReport-DJI.xls'",
+    "cmd": "open('ComponentReport-DJI.xls', 'rb').read(200)",
+    "question_id": "118516-73",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.urllib.request#open",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "open(, ).read()",
+    "canonical_cmd": "open('VAR_STR', 'rb').read(200)"
+  },
+  {
+    "nl": "create a new 2D array with 2 random rows from array `A`",
+    "cmd": "A[(np.random.choice(A.shape[0], 2, replace=False)), :]",
+    "question_id": "14262654-99",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.random.generated.numpy.random.choice"
+    ],
+    "clean_cmd": "A[(np.random.choice(A.shape[], , replace=False)), :]",
+    "canonical_cmd": "VAR_STR[(np.random.choice(VAR_STR.shape[0], 2, replace=False)), :]"
+  },
+  {
+    "nl": "create a new 2 dimensional array containing two random rows from array `A`",
+    "cmd": "A[(np.random.randint(A.shape[0], size=2)), :]",
+    "question_id": "14262654-92",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.random.generated.numpy.random.randint"
+    ],
+    "clean_cmd": "A[(np.random.randint(A.shape[], size=)), :]",
+    "canonical_cmd": "VAR_STR[(np.random.randint(VAR_STR.shape[0], size=2)), :]"
+  },
+  {
+    "nl": "Create an array containing the conversion of string '100110' into separate elements",
+    "cmd": "np.array(map(int, '100110'))",
+    "question_id": "28207743-2",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.array",
+      "python.library.functions#map"
+    ],
+    "clean_cmd": "np.array(map(int, ))",
+    "canonical_cmd": "np.array(map(int, 'VAR_STR'))"
+  },
+  {
+    "nl": "convert a string 'mystr' to numpy array of integer values",
+    "cmd": "print(np.array(list(mystr), dtype=int))",
+    "question_id": "28207743-2",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.array",
+      "python.library.functions#map"
+    ],
+    "clean_cmd": "print(np.array(list(mystr), dtype=int))",
+    "canonical_cmd": "print(np.array(list(VAR_STR), dtype=int))"
+  },
+  {
+    "nl": "print letter that appears most frequently in string `s`",
+    "cmd": "print(collections.Counter(s).most_common(1)[0])",
+    "question_id": "4131123-37",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.collections#collections.Counter",
+      "python.library.collections#collections.Counter.most_common"
+    ],
+    "clean_cmd": "print(collections.Counter(s).most_common()[])",
+    "canonical_cmd": "print(collections.Counter(VAR_STR).most_common(1)[0])"
+  },
+  {
+    "nl": "Exit script",
+    "cmd": "sys.exit()",
+    "question_id": "3376534-57",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.sys#sys.exit"
+    ],
+    "clean_cmd": "sys.exit()",
+    "canonical_cmd": "sys.exit()"
+  },
+  {
+    "nl": "match the pattern '[:;][)(](?![)(])' to the string `str`",
+    "cmd": "re.match('[:;][)(](?![)(])', str)",
+    "question_id": "14571103-97",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.re#re.match"
+    ],
+    "clean_cmd": "re.match(, str)",
+    "canonical_cmd": "re.match('VAR_STR', VAR_STR)"
+  },
+  {
+    "nl": "execute file 'filename.py'",
+    "cmd": "exec(compile(open('filename.py').read(), 'filename.py', 'exec'))",
+    "question_id": "1027714-50",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#exec",
+      "python.library.functions#compile",
+      "python.library.urllib.request#open",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "exec(compile(open().read(), , ))",
+    "canonical_cmd": "exec(compile(open('VAR_STR').read(), 'VAR_STR', 'exec'))"
+  },
+  {
+    "nl": "select records of dataframe `df` where the sum of column 'X' for each value in column 'User' is 0",
+    "cmd": "df.groupby('User')['X'].filter(lambda x: x.sum() == 0)",
+    "question_id": "27868020-50",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.groupby",
+      "python.library.functions#filter",
+      "pandas.reference.api.pandas.dataframe.sum"
+    ],
+    "clean_cmd": "df.groupby()[].filter( x: x.sum() == )",
+    "canonical_cmd": "VAR_STR.groupby('VAR_STR')['VAR_STR'].filter(lambda x: x.sum() == 0)"
+  },
+  {
+    "nl": "Find all records from collection `collection` without extracting mongo id `_id`",
+    "cmd": "db.collection.find({}, {'_id': False})",
+    "question_id": "12345387-21",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#str.find"
+    ],
+    "clean_cmd": "db.collection.find({}, {: False})",
+    "canonical_cmd": "db.VAR_STR.find({}, {'VAR_STR': False})"
+  },
+  {
+    "nl": "find the magnitude (length) squared of a vector `vf` field",
+    "cmd": "np.einsum('...j,...j->...', vf, vf)",
+    "question_id": "19863964-8",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.einsum"
+    ],
+    "clean_cmd": "np.einsum(, vf, vf)",
+    "canonical_cmd": "np.einsum('...j,...j->...', VAR_STR, VAR_STR)"
+  },
+  {
+    "nl": "Get `3` unique items from a list",
+    "cmd": "random.sample(list(range(1, 16)), 3)",
+    "question_id": "6494508-48",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.random#random.sample",
+      "python.library.functions#range",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "random.sample(list(range(, )), )",
+    "canonical_cmd": "random.sample(list(range(1, 16)), 3)"
+  },
+  {
+    "nl": "convert string of bytes `y\\xcc\\xa6\\xbb` into an int",
+    "cmd": "struct.unpack('<L', 'y\\xcc\\xa6\\xbb')[0]",
+    "question_id": "444591-34",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.struct#struct.unpack"
+    ],
+    "clean_cmd": "struct.unpack(, )[]",
+    "canonical_cmd": "struct.unpack('<L', 'VAR_STR')[0]"
+  },
+  {
+    "nl": "get a list of all integer points in a `dim` dimensional hypercube with coordinates from `-x` to `y` for all dimensions",
+    "cmd": "list(itertools.product(list(range(-x, y)), repeat=dim))",
+    "question_id": "41727442-65",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#list",
+      "python.library.itertools#itertools.product",
+      "python.library.functions#range"
+    ],
+    "clean_cmd": "list(itertools.product(list(range(-x, y)), repeat=dim))",
+    "canonical_cmd": "list(itertools.product(list(range(-x, VAR_STR)), repeat=VAR_STR))"
+  },
+  {
+    "nl": "extract data field 'bar' from json object",
+    "cmd": "json.loads('{\"foo\": 42, \"bar\": \"baz\"}')['bar']",
+    "question_id": "6407780-2",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.json#json.loads"
+    ],
+    "clean_cmd": "json.loads()[]",
+    "canonical_cmd": "json.loads('{\"foo\": 42, \"bar\": \"baz\"}')['VAR_STR']"
+  },
+  {
+    "nl": "webbrowser open url `url`",
+    "cmd": "webbrowser.open_new(url)",
+    "question_id": "4302027-94",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.webbrowser#webbrowser.open_new"
+    ],
+    "clean_cmd": "webbrowser.open_new(url)",
+    "canonical_cmd": "webbrowser.open_new(VAR_STR)"
+  },
+  {
+    "nl": "pandas subtract a row from dataframe `df2` from dataframe `df`",
+    "cmd": "pd.DataFrame(df.values - df2.values, columns=df.columns)",
+    "question_id": "22093471-66",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe"
+    ],
+    "clean_cmd": "pd.DataFrame(df.values - df2.values, columns=df.columns)",
+    "canonical_cmd": "pd.DataFrame(VAR_STR.values - VAR_STR.values, columns=VAR_STR.columns)"
+  },
+  {
+    "nl": "delete file `filename`",
+    "cmd": "os.remove(filename)",
+    "question_id": "39998424-26",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.remove"
+    ],
+    "clean_cmd": "os.remove(filename)",
+    "canonical_cmd": "os.remove(VAR_STR)"
+  },
+  {
+    "nl": "update the `globals()` dictionary with the contents of the `vars(args)` dictionary",
+    "cmd": "globals().update(vars(args))",
+    "question_id": "8306171-4",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#vars",
+      "python.library.functions#globals",
+      "python.library.stdtypes#dict.update"
+    ],
+    "clean_cmd": "globals().update(vars(args))",
+    "canonical_cmd": "globals().update(vars(args))"
+  },
+  {
+    "nl": "convert a string of date strings `date_stngs ` to datetime objects and put them in a dataframe",
+    "cmd": "pd.to_datetime(pd.Series(date_stngs))",
+    "question_id": "17690738-39",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.to_datetime",
+      "pandas.reference.series"
+    ],
+    "clean_cmd": "pd.to_datetime(pd.Series(date_stngs))",
+    "canonical_cmd": "pd.to_datetime(pd.Series(VAR_STR))"
+  },
+  {
+    "nl": "Formate current date and time to a string using pattern '%Y-%m-%d %H:%M:%S'",
+    "cmd": "datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')",
+    "question_id": "7999935-36",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.now",
+      "python.library.datetime#datetime.datetime.strftime"
+    ],
+    "clean_cmd": "datetime.datetime.now().strftime()",
+    "canonical_cmd": "datetime.datetime.now().strftime('VAR_STR')"
+  },
+  {
+    "nl": "combine two dictionaries `d ` and `d1`, concatenate string values with identical `keys`",
+    "cmd": "dict((k, d.get(k, '') + d1.get(k, '')) for k in keys)",
+    "question_id": "17604837-13",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict",
+      "python.library.stdtypes#dict.get"
+    ],
+    "clean_cmd": "dict((k, d.get(k, ) + d1.get(k, ))  k  keys)",
+    "canonical_cmd": "dict((k, VAR_STR.get(k, '') + VAR_STR.get(k, '')) for k in VAR_STR)"
+  },
+  {
+    "nl": "Get day name from a datetime object",
+    "cmd": "date.today().strftime('%A')",
+    "question_id": "8380389-66",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.date.today",
+      "python.library.datetime#datetime.date.strftime"
+    ],
+    "clean_cmd": "date.today().strftime()",
+    "canonical_cmd": "date.today().strftime('%A')"
+  },
+  {
+    "nl": "generate pdf file `output_filename` from markdown file `input_filename`",
+    "cmd": "with open(input_filename, 'r') as f:\n    html_text = markdown(f.read(), output_format='html4')\npdfkit.from_string(html_text, output_filename)",
+    "question_id": "4135344-11",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.urllib.request#open",
+      "django.ref.templates.api#django.template.Engine.from_string",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": " open(input_filename, )  f:html_text = markdown(f.read(), output_format=)pdfkit.from_string(html_text, output_filename)",
+    "canonical_cmd": "with open(VAR_STR, 'r') as f:\n    html_text = markdown(f.read(), output_format='html4')\npdfkit.from_string(html_text, VAR_STR)"
+  },
+  {
+    "nl": "return http status code 204 from a django view",
+    "cmd": "return HttpResponse(status=204)",
+    "question_id": "12476452-40",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.http.client#http.client.HTTPResponse"
+    ],
+    "clean_cmd": " HttpResponse(status=)",
+    "canonical_cmd": "return HttpResponse(status=204)"
+  },
+  {
+    "nl": "assign an array of floats in range from 0 to 100 to a variable `values`",
+    "cmd": "values = np.array([i for i in range(100)], dtype=np.float64)",
+    "question_id": "23638638-89",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.array",
+      "python.library.functions#range"
+    ],
+    "clean_cmd": "values = np.array([i  i  range()], dtype=np.float64)",
+    "canonical_cmd": "VAR_STR = np.array([i for i in range(100)], dtype=np.float64)"
+  },
+  {
+    "nl": "create a NumPy array containing elements of array `A` as pointed to by index in array `B`",
+    "cmd": "A[np.arange(A.shape[0])[:, (None)], B]",
+    "question_id": "37878946-16",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.arange"
+    ],
+    "clean_cmd": "A[np.arange(A.shape[])[:, (None)], B]",
+    "canonical_cmd": "VAR_STR[np.arange(VAR_STR.shape[0])[:, (None)], VAR_STR]"
+  },
+  {
+    "nl": "remove adjacent duplicate elements from a list `[1, 2, 2, 3, 2, 2, 4]`",
+    "cmd": "[k for k, g in itertools.groupby([1, 2, 2, 3, 2, 2, 4])]",
+    "question_id": "3460161-42",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.itertools#itertools.groupby"
+    ],
+    "clean_cmd": "[k  k, g  itertools.groupby([, , , , , , ])]",
+    "canonical_cmd": "[k for k, g in itertools.groupby([VAR_STR])]"
+  },
+  {
+    "nl": "set labels `[1, 2, 3, 4, 5]` on axis X in plot `plt`",
+    "cmd": "plt.xticks([1, 2, 3, 4, 5])",
+    "question_id": "10839719-92",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib._as_gen.matplotlib.pyplot.xticks"
+    ],
+    "clean_cmd": "plt.xticks([, , , , ])",
+    "canonical_cmd": "VAR_STR.xticks([VAR_STR])"
+  },
+  {
+    "nl": "get value of the environment variable 'KEY_THAT_MIGHT_EXIST'",
+    "cmd": "print(os.environ.get('KEY_THAT_MIGHT_EXIST'))",
+    "question_id": "4906977-8",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.webbrowser#webbrowser.get"
+    ],
+    "clean_cmd": "print(os.environ.get())",
+    "canonical_cmd": "print(os.environ.get('VAR_STR'))"
+  },
+  {
+    "nl": "get value of the environment variable 'HOME' with default value '/home/username/'",
+    "cmd": "print(os.environ.get('HOME', '/home/username/'))",
+    "question_id": "4906977-57",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.webbrowser#webbrowser.get"
+    ],
+    "clean_cmd": "print(os.environ.get(, ))",
+    "canonical_cmd": "print(os.environ.get('VAR_STR', 'VAR_STR'))"
+  },
+  {
+    "nl": "find all the indexes in a Numpy 2D array where the value is 1",
+    "cmd": "zip(*np.where(a == 1))",
+    "question_id": "27175400-13",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.where",
+      "python.library.functions#zip"
+    ],
+    "clean_cmd": "zip(*np.where(a == ))",
+    "canonical_cmd": "zip(*np.where(a == 1))"
+  },
+  {
+    "nl": "How to find the index of a value in 2d array in Python?",
+    "cmd": "np.where(a == 1)",
+    "question_id": "27175400-85",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.where"
+    ],
+    "clean_cmd": "np.where(a == )",
+    "canonical_cmd": "np.where(a == 1)"
+  },
+  {
+    "nl": "split dictionary/list inside a pandas column 'b' into separate columns in dataframe `df`",
+    "cmd": "pd.concat([df.drop('b', axis=1), pd.DataFrame(df['b'].tolist())], axis=1)",
+    "question_id": "38231591-22",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.drop",
+      "pandas.reference.api.pandas.dataframe",
+      "pandas.reference.api.pandas.concat"
+    ],
+    "clean_cmd": "pd.concat([df.drop(, axis=), pd.DataFrame(df[].tolist())], axis=)",
+    "canonical_cmd": "pd.concat([VAR_STR.drop('VAR_STR', axis=1), pd.DataFrame(VAR_STR['VAR_STR'].tolist(\n    ))], axis=1)"
+  },
+  {
+    "nl": "reorder indexed rows `['Z', 'C', 'A']` based on a list in pandas data frame `df`",
+    "cmd": "df.reindex(['Z', 'C', 'A'])",
+    "question_id": "30009948-74",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.reindex"
+    ],
+    "clean_cmd": "df.reindex([, , ])",
+    "canonical_cmd": "VAR_STR.reindex([VAR_STR])"
+  },
+  {
+    "nl": "store the output of command 'ls' in variable `direct_output`",
+    "cmd": "direct_output = subprocess.check_output('ls', shell=True)",
+    "question_id": "19267591-38",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.subprocess#subprocess.check_output"
+    ],
+    "clean_cmd": "direct_output = subprocess.check_output(, shell=True)",
+    "canonical_cmd": "VAR_STR = subprocess.check_output('VAR_STR', shell=True)"
+  },
+  {
+    "nl": "reverse all x-axis points in pyplot",
+    "cmd": "plt.gca().invert_xaxis()",
+    "question_id": "2051744-10",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib.figure_api#matplotlib.figure.FigureBase.gca",
+      "matplotlib._as_gen.matplotlib.axes.axes.invert_xaxis"
+    ],
+    "clean_cmd": "plt.gca().invert_xaxis()",
+    "canonical_cmd": "plt.gca().invert_xaxis()"
+  },
+  {
+    "nl": "reverse y-axis in pyplot",
+    "cmd": "plt.gca().invert_yaxis()",
+    "question_id": "2051744-44",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib.figure_api#matplotlib.figure.FigureBase.gca",
+      "matplotlib._as_gen.matplotlib.axes.axes.invert_yaxis"
+    ],
+    "clean_cmd": "plt.gca().invert_yaxis()",
+    "canonical_cmd": "plt.gca().invert_yaxis()"
+  },
+  {
+    "nl": "Iterate over dictionary `d` in ascending order of values",
+    "cmd": "sorted(iter(d.items()), key=lambda x: x[1])",
+    "question_id": "674509-57",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#sorted",
+      "python.library.functions#iter",
+      "python.library.stdtypes#dict.items"
+    ],
+    "clean_cmd": "sorted(iter(d.items()), key= x: x[])",
+    "canonical_cmd": "sorted(iter(VAR_STR.items()), key=lambda x: x[1])"
+  },
+  {
+    "nl": "read file 'myfile.txt' using universal newline mode 'U'",
+    "cmd": "print(open('myfile.txt', 'U').read())",
+    "question_id": "2798627-16",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.urllib.request#open",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "print(open(, ).read())",
+    "canonical_cmd": "print(open('VAR_STR', 'VAR_STR').read())"
+  },
+  {
+    "nl": "Change the mode of file 'my_script.sh' to permission number 484",
+    "cmd": "os.chmod('my_script.sh', 484)",
+    "question_id": "14104778-7",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.chmod"
+    ],
+    "clean_cmd": "os.chmod(, )",
+    "canonical_cmd": "os.chmod('VAR_STR', 484)"
+  },
+  {
+    "nl": "multiply array `a` and array `b`respective elements then sum each row of the new array",
+    "cmd": "np.einsum('ji,i->j', a, b)",
+    "question_id": "21562986-78",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.einsum"
+    ],
+    "clean_cmd": "np.einsum(, a, b)",
+    "canonical_cmd": "np.einsum('ji,i->j', VAR_STR, VAR_STR)"
+  },
+  {
+    "nl": "add field names as headers in csv constructor `writer`",
+    "cmd": "writer.writeheader()",
+    "question_id": "20347766-10",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.csv#csv.DictWriter.writeheader"
+    ],
+    "clean_cmd": "writer.writeheader()",
+    "canonical_cmd": "VAR_STR.writeheader()"
+  },
+  {
+    "nl": "execute sql query 'INSERT INTO table VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)' with all parameters in list `tup`",
+    "cmd": "cur.executemany('INSERT INTO table VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)', tup)",
+    "question_id": "8134602-90",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.sqlite3#sqlite3.Connection.executemany"
+    ],
+    "clean_cmd": "cur.executemany(, tup)",
+    "canonical_cmd": "cur.executemany('VAR_STR', VAR_STR)"
+  },
+  {
+    "nl": "lowercase string values with key 'content' in a list of dictionaries `messages`",
+    "cmd": "[{'content': x['content'].lower()} for x in messages]",
+    "question_id": "42353686-21",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#str.lower"
+    ],
+    "clean_cmd": "[{: x[].lower()}  x  messages]",
+    "canonical_cmd": "[{'VAR_STR': x['VAR_STR'].lower()} for x in VAR_STR]"
+  },
+  {
+    "nl": "Unpack column 'stats' in dataframe `df` into a series of columns",
+    "cmd": "df['stats'].apply(pd.Series)",
+    "question_id": "29370211-89",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.series.apply"
+    ],
+    "clean_cmd": "df[].apply(pd.Series)",
+    "canonical_cmd": "VAR_STR['VAR_STR'].apply(pd.Series)"
+  },
+  {
+    "nl": "lookup an attribute in any scope by name 'range'",
+    "cmd": "getattr(__builtins__, 'range')",
+    "question_id": "2850966-83",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#getattr"
+    ],
+    "clean_cmd": "getattr(__builtins__, )",
+    "canonical_cmd": "getattr(__builtins__, 'VAR_STR')"
+  },
+  {
+    "nl": "Remove character `char` from a string `a`",
+    "cmd": "a = a.replace(char, '')",
+    "question_id": "3939361-45",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.char.replace"
+    ],
+    "clean_cmd": "a = a.replace(char, )",
+    "canonical_cmd": "VAR_STR = VAR_STR.replace(VAR_STR, '')"
+  },
+  {
+    "nl": "Remove characters in `b` from a string `a`",
+    "cmd": "a = a.replace(char, '')",
+    "question_id": "3939361-16",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.char.replace"
+    ],
+    "clean_cmd": "a = a.replace(char, )",
+    "canonical_cmd": "VAR_STR = VAR_STR.replace(char, '')"
+  },
+  {
+    "nl": "SQLAlchemy count the number of rows in table `Congress`",
+    "cmd": "rows = session.query(Congress).count()",
+    "question_id": "10822635-77",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#str.count"
+    ],
+    "clean_cmd": "rows = session.query(Congress).count()",
+    "canonical_cmd": "rows = session.query(VAR_STR).count()"
+  },
+  {
+    "nl": "find the index of the second occurrence of the substring `bar` in string `foo bar bar bar`",
+    "cmd": "\"\"\"foo bar bar bar\"\"\".replace('bar', 'XXX', 1).find('bar')",
+    "question_id": "1883980-4",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#str.find",
+      "python.library.stdtypes#str.replace"
+    ],
+    "clean_cmd": ".replace(, , ).find()",
+    "canonical_cmd": "\"\"\"VAR_STR\"\"\".replace('VAR_STR', 'XXX', 1).find('VAR_STR')"
+  },
+  {
+    "nl": "concatenate a series `students` onto a dataframe `marks` with pandas",
+    "cmd": "pd.concat([students, pd.DataFrame(marks)], axis=1)",
+    "question_id": "20512297-60",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.concat",
+      "pandas.reference.api.pandas.dataframe"
+    ],
+    "clean_cmd": "pd.concat([students, pd.DataFrame(marks)], axis=)",
+    "canonical_cmd": "pd.concat([VAR_STR, pd.DataFrame(VAR_STR)], axis=1)"
+  },
+  {
+    "nl": "create list `randomList` with 10 random floating point numbers between 0.0 and 1.0",
+    "cmd": "randomList = [random.random() for _ in range(10)]",
+    "question_id": "20733827-49",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#range"
+    ],
+    "clean_cmd": "randomList = [random.random()  _  range()]",
+    "canonical_cmd": "VAR_STR = [random.random() for _ in range(10)]"
+  },
+  {
+    "nl": "create dictionary from list of variables 'foo' and 'bar' already defined",
+    "cmd": "dict((k, globals()[k]) for k in ('foo', 'bar'))",
+    "question_id": "9495262-53",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#globals",
+      "python.library.stdtypes#dict"
+    ],
+    "clean_cmd": "dict((k, globals()[k])  k  (, ))",
+    "canonical_cmd": "dict((k, globals()[k]) for k in ('VAR_STR', 'VAR_STR'))"
+  },
+  {
+    "nl": "get a dataframe `df2` that contains all the columns of dataframe `df` that do not end in `prefix`",
+    "cmd": "df2 = df.ix[:, (~df.columns.str.endswith('prefix'))]",
+    "question_id": "38426168-57",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.series.str.endswith"
+    ],
+    "clean_cmd": "df2 = df.ix[:, (~df.columns.str.endswith())]",
+    "canonical_cmd": "VAR_STR = VAR_STR.ix[:, (~VAR_STR.columns.str.endswith('VAR_STR'))]"
+  },
+  {
+    "nl": "substract 1 hour and 10 minutes from current time",
+    "cmd": "t = datetime.datetime.now()\n(t - datetime.timedelta(hours=1, minutes=10))",
+    "question_id": "14043934-77",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.now",
+      "python.library.datetime#datetime.timedelta"
+    ],
+    "clean_cmd": "t = datetime.datetime.now()(t - datetime.timedelta(hours=, minutes=))",
+    "canonical_cmd": "t = datetime.datetime.now()\nt - datetime.timedelta(hours=1, minutes=10)"
+  },
+  {
+    "nl": "add 1 hour and 2 minutes to time object `t`",
+    "cmd": "dt = datetime.datetime.combine(datetime.date.today(), t)",
+    "question_id": "14043934-78",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.date.today",
+      "python.library.datetime#datetime.datetime.combine"
+    ],
+    "clean_cmd": "dt = datetime.datetime.combine(datetime.date.today(), t)",
+    "canonical_cmd": "dt = datetime.datetime.combine(datetime.date.today(), VAR_STR)"
+  },
+  {
+    "nl": "Create new string with unique characters from `s` seperated by ' '",
+    "cmd": "print(' '.join(OrderedDict.fromkeys(s)))",
+    "question_id": "29360607-46",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict.fromkeys",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": "print(.join(OrderedDict.fromkeys(s)))",
+    "canonical_cmd": "print(' '.join(OrderedDict.fromkeys(VAR_STR)))"
+  },
+  {
+    "nl": "create a set from string `s` to remove duplicate characters",
+    "cmd": "print(' '.join(set(s)))",
+    "question_id": "29360607-46",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict.fromkeys",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": "print(.join(set(s)))",
+    "canonical_cmd": "print(' '.join(set(VAR_STR)))"
+  },
+  {
+    "nl": "find the index of the maximum value in the array `arr` where the boolean condition in array `cond` is true",
+    "cmd": "np.ma.array(np.tile(arr, 2).reshape(2, 3), mask=~cond).argmax(axis=1)",
+    "question_id": "31767173-52",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.ma.array",
+      "numpy.reference.generated.numpy.tile",
+      "numpy.reference.generated.numpy.ma.argmax",
+      "numpy.reference.generated.numpy.ma.reshape"
+    ],
+    "clean_cmd": "np.ma.array(np.tile(arr, ).reshape(, ), mask=~cond).argmax(axis=)",
+    "canonical_cmd": "np.ma.array(np.tile(VAR_STR, 2).reshape(2, 3), mask=~VAR_STR).argmax(axis=1)"
+  },
+  {
+    "nl": "Get data from matplotlib plot",
+    "cmd": "gca().get_lines()[n].get_xydata()",
+    "question_id": "8938449-32",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib._as_gen.matplotlib.lines.line2d#matplotlib.lines.Line2D.get_xydata",
+      "matplotlib.legend_api#matplotlib.legend.Legend.get_lines",
+      "matplotlib.figure_api#matplotlib.figure.SubFigure.gca"
+    ],
+    "clean_cmd": "gca().get_lines()[n].get_xydata()",
+    "canonical_cmd": "gca().get_lines()[n].get_xydata()"
+  },
+  {
+    "nl": "BeautifulSoup search string 'Elsie' inside tag 'a'",
+    "cmd": "soup.find_all('a', string='Elsie')",
+    "question_id": "31958637-91",
+    "cmd_name": "conala",
+    "oracle_man": [],
+    "clean_cmd": "soup.find_all(, string=)",
+    "canonical_cmd": "soup.find_all('VAR_STR', string='VAR_STR')"
+  },
+  {
+    "nl": "create a dataframe containing the multiplication of element-wise in dataframe `df` and dataframe `df2` using index name and column labels of dataframe `df`",
+    "cmd": "pd.DataFrame(df.values * df2.values, columns=df.columns, index=df.index)",
+    "question_id": "21022865-77",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe"
+    ],
+    "clean_cmd": "pd.DataFrame(df.values * df2.values, columns=df.columns, index=df.index)",
+    "canonical_cmd": "pd.DataFrame(VAR_STR.values * VAR_STR.values, columns=VAR_STR.columns, index=\n    VAR_STR.index)"
+  },
+  {
+    "nl": "sort a list of dictionaries `list_of_dct` by values in an order `order`",
+    "cmd": "sorted(list_of_dct, key=lambda x: order.index(list(x.values())[0]))",
+    "question_id": "35078261-21",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#sorted",
+      "python.library.functions#list",
+      "pandas.reference.api.pandas.index.values"
+    ],
+    "clean_cmd": "sorted(list_of_dct, key= x: order.index(list(x.values())[]))",
+    "canonical_cmd": "sorted(VAR_STR, key=lambda x: VAR_STR.index(list(x.values())[0]))"
+  },
+  {
+    "nl": "concatenate dataframe `df1` with `df2` whilst removing duplicates",
+    "cmd": "pandas.concat([df1, df2]).drop_duplicates().reset_index(drop=True)",
+    "question_id": "21317384-58",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.concat",
+      "pandas.reference.api.pandas.dataframe.reset_index",
+      "pandas.reference.api.pandas.dataframe.drop_duplicates"
+    ],
+    "clean_cmd": "pandas.concat([df1, df2]).drop_duplicates().reset_index(drop=True)",
+    "canonical_cmd": "pandas.concat([VAR_STR, VAR_STR]).drop_duplicates().reset_index(drop=True)"
+  },
+  {
+    "nl": "pretty-print ordered dictionary `o`",
+    "cmd": "pprint(dict(list(o.items())))",
+    "question_id": "4301069-72",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict",
+      "python.library.functions#list",
+      "python.library.stdtypes#dict.items",
+      "python.library.pprint#pprint.pprint"
+    ],
+    "clean_cmd": "pprint(dict(list(o.items())))",
+    "canonical_cmd": "pprint(dict(list(VAR_STR.items())))"
+  },
+  {
+    "nl": "import a nested module `c.py` within `b` within `a` with importlib",
+    "cmd": "importlib.import_module('.c', 'a.b')",
+    "question_id": "10675054-45",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.importlib#importlib.import_module"
+    ],
+    "clean_cmd": "importlib.import_module(, )",
+    "canonical_cmd": "importlib.import_module('.c', 'a.b')"
+  },
+  {
+    "nl": "import a module 'a.b.c' with importlib.import_module in python 2",
+    "cmd": "importlib.import_module('a.b.c')",
+    "question_id": "10675054-25",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.importlib#importlib.import_module"
+    ],
+    "clean_cmd": "importlib.import_module()",
+    "canonical_cmd": "importlib.import_module('VAR_STR')"
+  },
+  {
+    "nl": "update fields in Django model `Book` with arguments in dictionary `d` where primary key is equal to `pk`",
+    "cmd": "Book.objects.filter(pk=pk).update(**d)",
+    "question_id": "5503925-38",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.logging#logging.Filter.filter",
+      "python.library.stdtypes#dict.update"
+    ],
+    "clean_cmd": "Book.objects.filter(pk=pk).update(**d)",
+    "canonical_cmd": "VAR_STR.objects.filter(VAR_STR=VAR_STR).update(**VAR_STR)"
+  },
+  {
+    "nl": "update the fields in django model `Book` using dictionary `d`",
+    "cmd": "Book.objects.create(**d)",
+    "question_id": "5503925-47",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.venv#venv.create"
+    ],
+    "clean_cmd": "Book.objects.create(**d)",
+    "canonical_cmd": "VAR_STR.objects.create(**VAR_STR)"
+  },
+  {
+    "nl": "Generate MD5 checksum of file in the path `full_path` in hashlib",
+    "cmd": "print(hashlib.md5(open(full_path, 'rb').read()).hexdigest())",
+    "question_id": "3431825-77",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.urllib.request#open",
+      "python.library.hashlib#hashlib.hash.hexdigest",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "print(hashlib.md5(open(full_path, ).read()).hexdigest())",
+    "canonical_cmd": "print(hashlib.md5(open(VAR_STR, 'rb').read()).hexdigest())"
+  },
+  {
+    "nl": "Get the number of NaN values in each column of dataframe `df`",
+    "cmd": "df.isnull().sum()",
+    "question_id": "26266362-41",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.isnull",
+      "python.library.functions#sum"
+    ],
+    "clean_cmd": "df.isnull().sum()",
+    "canonical_cmd": "VAR_STR.isnull().sum()"
+  },
+  {
+    "nl": "find all anchor tags in html `soup` whose url begins with `http://www.iwashere.com`",
+    "cmd": "soup.find_all('a', href=re.compile('http://www\\\\.iwashere\\\\.com/'))",
+    "question_id": "15313250-71",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.re#re.compile"
+    ],
+    "clean_cmd": "soup.find_all(, href=re.compile())",
+    "canonical_cmd": "VAR_STR.find_all('a', href=re.compile('http://www\\\\.iwashere\\\\.com/'))"
+  },
+  {
+    "nl": "find all anchors with a hyperlink that matches the pattern '^(?!(?:[a-zA-Z][a-zA-Z0-9+.-]*:|//))'",
+    "cmd": "soup.find_all('a', href=re.compile('^(?!(?:[a-zA-Z][a-zA-Z0-9+.-]*:|//))'))",
+    "question_id": "15313250-56",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.re#re.compile"
+    ],
+    "clean_cmd": "soup.find_all(, href=re.compile())",
+    "canonical_cmd": "soup.find_all('a', href=re.compile('VAR_STR'))"
+  },
+  {
+    "nl": "generate a random 12-digit number",
+    "cmd": "int(''.join(str(random.randint(0, 9)) for _ in range(12)))",
+    "question_id": "13496087-15",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.random#random.randint",
+      "python.library.functions#range",
+      "python.library.functions#int",
+      "python.library.stdtypes#str",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": "int(.join(str(random.randint(, ))  _  range()))",
+    "canonical_cmd": "int(''.join(str(random.randint(0, 9)) for _ in range(12)))"
+  },
+  {
+    "nl": "generate a random 12-digit number",
+    "cmd": "\"\"\"\"\"\".join(str(random.randint(0, 9)) for _ in range(12))",
+    "question_id": "13496087-80",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.random#random.randint",
+      "python.library.functions#range",
+      "python.library.stdtypes#str",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": ".join(str(random.randint(, ))  _  range())",
+    "canonical_cmd": "\"\"\"\"\"\".join(str(random.randint(0, 9)) for _ in range(12))"
+  },
+  {
+    "nl": "How to delete a record in Django models?",
+    "cmd": "SomeModel.objects.filter(id=id).delete()",
+    "question_id": "3805958-22",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.logging#logging.Filter.filter",
+      "python.library.ast#ast.Delete"
+    ],
+    "clean_cmd": "SomeModel.objects.filter(id=id).delete()",
+    "canonical_cmd": "SomeModel.objects.filter(id=id).delete()"
+  },
+  {
+    "nl": "retrieve all items in an numpy array 'x' except the item of the index 1",
+    "cmd": "x[(np.arange(x.shape[0]) != 1), :, :]",
+    "question_id": "8712332-35",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.arange"
+    ],
+    "clean_cmd": "x[(np.arange(x.shape[]) != ), :, :]",
+    "canonical_cmd": "VAR_STR[(np.arange(VAR_STR.shape[0]) != 1), :, :]"
+  },
+  {
+    "nl": "split dataframe `df` where the value of column `a` is equal to 'B'",
+    "cmd": "df.groupby((df.a == 'B').shift(1).fillna(0).cumsum())",
+    "question_id": "13353233-57",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.groupby",
+      "pandas.reference.api.pandas.dataframe.fillna",
+      "pandas.reference.api.pandas.dataframe.shift",
+      "pandas.reference.api.pandas.dataframe.cumsum"
+    ],
+    "clean_cmd": "df.groupby((df.a == ).shift().fillna().cumsum())",
+    "canonical_cmd": "VAR_STR.groupby((VAR_STR.VAR_STR == 'VAR_STR').shift(1).fillna(0).cumsum())"
+  },
+  {
+    "nl": "removing control characters from a string `s`",
+    "cmd": "return ''.join(ch for ch in s if unicodedata.category(ch)[0] != 'C')",
+    "question_id": "4324790-58",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.unicodedata#unicodedata.category",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": " .join(ch  ch  s  unicodedata.category(ch)[] != )",
+    "canonical_cmd": "return ''.join(ch for ch in VAR_STR if unicodedata.category(ch)[0] != 'C')"
+  },
+  {
+    "nl": "return a DateTime object with the current UTC date",
+    "cmd": "today = datetime.datetime.utcnow().date()",
+    "question_id": "27587127-62",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.utcnow",
+      "python.library.datetime#datetime.datetime.date"
+    ],
+    "clean_cmd": "today = datetime.datetime.utcnow().date()",
+    "canonical_cmd": "today = datetime.datetime.utcnow().date()"
+  },
+  {
+    "nl": "remove decimal points in pandas data frame using round",
+    "cmd": "df.round()",
+    "question_id": "37084812-85",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.round"
+    ],
+    "clean_cmd": "df.round()",
+    "canonical_cmd": "df.round()"
+  },
+  {
+    "nl": "print the truth value of `a`",
+    "cmd": "print(bool(a))",
+    "question_id": "39604780-88",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#bool"
+    ],
+    "clean_cmd": "print(bool(a))",
+    "canonical_cmd": "print(bool(VAR_STR))"
+  },
+  {
+    "nl": "Parsing HTML string `html` using BeautifulSoup",
+    "cmd": "parsed_html = BeautifulSoup(html)\nprint(parsed_html.body.find('div', attrs={'class': 'container', }).text)",
+    "question_id": "11709079-7",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#str.find"
+    ],
+    "clean_cmd": "parsed_html = BeautifulSoup(html)print(parsed_html.body.find(, attrs={: , }).text)",
+    "canonical_cmd": "parsed_html = BeautifulSoup(VAR_STR)\nprint(parsed_html.body.find('div', attrs={'class': 'container'}).text)"
+  },
+  {
+    "nl": "convert a column of list in series `s` to dummies",
+    "cmd": "pd.get_dummies(s.apply(pd.Series).stack()).sum(level=0)",
+    "question_id": "29034928-61",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.get_dummies",
+      "python.library.functions#sum",
+      "pandas.reference.api.pandas.series.apply",
+      "pandas.reference.api.pandas.dataframe.stack"
+    ],
+    "clean_cmd": "pd.get_dummies(s.apply(pd.Series).stack()).sum(level=)",
+    "canonical_cmd": "pd.get_dummies(VAR_STR.apply(pd.Series).stack()).sum(level=0)"
+  },
+  {
+    "nl": "create a matrix from a list `[1, 2, 3]`",
+    "cmd": "x = scipy.matrix([1, 2, 3]).transpose()",
+    "question_id": "4690366-20",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.matrix.transpose"
+    ],
+    "clean_cmd": "x = scipy.matrix([, , ]).transpose()",
+    "canonical_cmd": "x = scipy.matrix([VAR_STR]).transpose()"
+  },
+  {
+    "nl": "convert radians 1 to degrees",
+    "cmd": "math.cos(math.radians(1))",
+    "question_id": "9875964-60",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.math#math.radians",
+      "python.library.math#math.cos"
+    ],
+    "clean_cmd": "math.cos(math.radians())",
+    "canonical_cmd": "math.cos(math.radians(1))"
+  },
+  {
+    "nl": "create an empty data frame `df2` with index from another data frame `df1`",
+    "cmd": "df2 = pd.DataFrame(index=df1.index)",
+    "question_id": "18176933-47",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe"
+    ],
+    "clean_cmd": "df2 = pd.DataFrame(index=df1.index)",
+    "canonical_cmd": "VAR_STR = pd.DataFrame(index=VAR_STR.index)"
+  },
+  {
+    "nl": "make a window `root` jump to the front",
+    "cmd": "root.attributes('-topmost', True)",
+    "question_id": "1892339-81",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.xml.dom#xml.dom.Node.attributes"
+    ],
+    "clean_cmd": "root.attributes(, True)",
+    "canonical_cmd": "VAR_STR.attributes('-topmost', True)"
+  },
+  {
+    "nl": "apply function `log2` to the grouped values by 'type' in dataframe `df`",
+    "cmd": "df.groupby('type').apply(lambda x: np.mean(np.log2(x['v'])))",
+    "question_id": "18137341-8",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.log2",
+      "numpy.reference.generated.numpy.mean",
+      "pandas.reference.api.pandas.dataframe.groupby",
+      "pandas.reference.api.pandas.dataframe.apply"
+    ],
+    "clean_cmd": "df.groupby().apply( x: np.mean(np.log2(x[])))",
+    "canonical_cmd": "VAR_STR.groupby('VAR_STR').apply(lambda x: np.mean(np.VAR_STR(x['v'])))"
+  },
+  {
+    "nl": "Convert JSON array `array` to Python object",
+    "cmd": "data = json.loads(array)",
+    "question_id": "10973614-40",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.json#json.loads"
+    ],
+    "clean_cmd": "data = json.loads(array)",
+    "canonical_cmd": "data = json.loads(VAR_STR)"
+  },
+  {
+    "nl": "Convert JSON array `array` to Python object",
+    "cmd": "data = json.loads(array)",
+    "question_id": "10973614-6",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.json#json.loads"
+    ],
+    "clean_cmd": "data = json.loads(array)",
+    "canonical_cmd": "data = json.loads(VAR_STR)"
+  },
+  {
+    "nl": "print number 1255000 as thousands separators",
+    "cmd": "locale.setlocale(locale.LC_ALL, 'en_US')\nlocale.format('%d', 1255000, grouping=True)",
+    "question_id": "1823058-88",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.locale#locale.setlocale",
+      "python.library.locale#locale.format"
+    ],
+    "clean_cmd": "locale.setlocale(locale.LC_ALL, )locale.format(, , grouping=True)",
+    "canonical_cmd": "locale.setlocale(locale.LC_ALL, 'en_US')\nlocale.format('%d', 1255000, grouping=True)"
+  },
+  {
+    "nl": "Filter a json from a key-value pair as `{'fixed_key_1': 'foo2'}` in Django",
+    "cmd": "Test.objects.filter(actions__contains=[{'fixed_key_1': 'foo2'}])",
+    "question_id": "34358278-63",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.logging#logging.Filter.filter"
+    ],
+    "clean_cmd": "Test.objects.filter(actions__contains=[{: }])",
+    "canonical_cmd": "Test.objects.filter(actions__contains=[{VAR_STR}])"
+  },
+  {
+    "nl": "Move x-axis of the pyplot object `ax` to the top of a plot in matplotlib",
+    "cmd": "ax.xaxis.set_ticks_position('top')",
+    "question_id": "14406214-99",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib._as_gen.matplotlib.axis.xaxis.set_ticks_position"
+    ],
+    "clean_cmd": "ax.xaxis.set_ticks_position()",
+    "canonical_cmd": "VAR_STR.xaxis.set_ticks_position('top')"
+  },
+  {
+    "nl": "check if date `yourdatetime` is equal to today's date",
+    "cmd": "yourdatetime.date() == datetime.today().date()",
+    "question_id": "6407362-46",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.date.today",
+      "python.library.datetime#datetime.date"
+    ],
+    "clean_cmd": "yourdatetime.date() == datetime.today().date()",
+    "canonical_cmd": "VAR_STR.date() == datetime.today().date()"
+  },
+  {
+    "nl": "disable the certificate check in https requests for url `https://kennethreitz.com`",
+    "cmd": "requests.get('https://kennethreitz.com', verify=False)",
+    "question_id": "15445981-81",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.webbrowser#webbrowser.get"
+    ],
+    "clean_cmd": "requests.get(, verify=False)",
+    "canonical_cmd": "requests.get('VAR_STR', verify=False)"
+  },
+  {
+    "nl": "create a list containing all cartesian products of elements in list `a`",
+    "cmd": "list(itertools.product(*a))",
+    "question_id": "798854-41",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.itertools#itertools.product",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "list(itertools.product(*a))",
+    "canonical_cmd": "list(itertools.product(*VAR_STR))"
+  },
+  {
+    "nl": "generate a random string of length `x`  containing lower cased ASCII letters",
+    "cmd": "\"\"\"\"\"\".join(random.choice(string.lowercase) for x in range(X))",
+    "question_id": "1957273-17",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.random#random.choice",
+      "python.library.functions#range",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": ".join(random.choice(string.lowercase)  x  range(X))",
+    "canonical_cmd": "\"\"\"\"\"\".join(random.choice(string.lowercase) for VAR_STR in range(X))"
+  },
+  {
+    "nl": "get current datetime in ISO format",
+    "cmd": "datetime.datetime.now().isoformat()",
+    "question_id": "2150739-61",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.now",
+      "python.library.datetime#datetime.datetime.isoformat"
+    ],
+    "clean_cmd": "datetime.datetime.now().isoformat()",
+    "canonical_cmd": "datetime.datetime.now().isoformat()"
+  },
+  {
+    "nl": "get UTC datetime in ISO format",
+    "cmd": "datetime.datetime.utcnow().isoformat()",
+    "question_id": "2150739-5",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.utcnow",
+      "python.library.datetime#datetime.datetime.isoformat"
+    ],
+    "clean_cmd": "datetime.datetime.utcnow().isoformat()",
+    "canonical_cmd": "datetime.datetime.utcnow().isoformat()"
+  },
+  {
+    "nl": "Keep only unique words in list of words `words` and join into string",
+    "cmd": "print(' '.join(sorted(set(words), key=words.index)))",
+    "question_id": "7794208-3",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#sorted",
+      "python.library.stdtypes#set",
+      "pandas.reference.api.pandas.index.join"
+    ],
+    "clean_cmd": "print(.join(sorted(set(words), key=words.index)))",
+    "canonical_cmd": "print(' '.join(sorted(set(VAR_STR), key=VAR_STR.index)))"
+  },
+  {
+    "nl": "plot logarithmic axes with matplotlib",
+    "cmd": "ax.set_yscale('log')",
+    "question_id": "773814-28",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib.projections_api#matplotlib.projections.polar.PolarAxes.set_yscale"
+    ],
+    "clean_cmd": "ax.set_yscale()",
+    "canonical_cmd": "ax.set_yscale('log')"
+  },
+  {
+    "nl": "convert a number 2130706433 to ip string",
+    "cmd": "socket.inet_ntoa(struct.pack('!L', 2130706433))",
+    "question_id": "9590965-88",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.struct#struct.pack",
+      "python.library.socket#socket.inet_ntoa"
+    ],
+    "clean_cmd": "socket.inet_ntoa(struct.pack(, ))",
+    "canonical_cmd": "socket.inet_ntoa(struct.pack('!L', 2130706433))"
+  },
+  {
+    "nl": "numpy:  check if array 'a' contains all the numbers in array 'b'.",
+    "cmd": "numpy.array([(x in a) for x in b])",
+    "question_id": "10565598-47",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.array"
+    ],
+    "clean_cmd": "numpy.array([(x  a)  x  b])",
+    "canonical_cmd": "numpy.array([(x in VAR_STR) for x in VAR_STR])"
+  },
+  {
+    "nl": "Write column 'sum' of DataFrame `a` to csv file 'test.csv'",
+    "cmd": "a.to_csv('test.csv', cols=['sum'])",
+    "question_id": "21206395-91",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.to_csv"
+    ],
+    "clean_cmd": "a.to_csv(, cols=[])",
+    "canonical_cmd": "VAR_STR.to_csv('VAR_STR', cols=['VAR_STR'])"
+  },
+  {
+    "nl": "filter dataframe `grouped` where the length of each group `x` is bigger than 1",
+    "cmd": "grouped.filter(lambda x: len(x) > 1)",
+    "question_id": "13167391-7",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#len",
+      "python.library.logging#logging.Filter.filter"
+    ],
+    "clean_cmd": "grouped.filter( x: len(x) &gt; )",
+    "canonical_cmd": "VAR_STR.filter(lambda VAR_STR: len(VAR_STR) > 1)"
+  },
+  {
+    "nl": "set the y axis range to `0, 1000` in subplot using pylab",
+    "cmd": "pylab.ylim([0, 1000])",
+    "question_id": "2849286-49",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib._as_gen.matplotlib.pyplot.ylim"
+    ],
+    "clean_cmd": "pylab.ylim([, ])",
+    "canonical_cmd": "pylab.ylim([0, 1000])"
+  },
+  {
+    "nl": "get yesterday's date as a string in `YYYY-MM-DD` format using timedelta",
+    "cmd": "(datetime.now() - timedelta(1)).strftime('%Y-%m-%d')",
+    "question_id": "30483977-35",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.now",
+      "python.library.datetime#datetime.datetime.strftime",
+      "python.library.datetime#datetime.timedelta"
+    ],
+    "clean_cmd": "(datetime.now() - timedelta()).strftime()",
+    "canonical_cmd": "(datetime.now() - timedelta(1)).strftime('%Y-%m-%d')"
+  },
+  {
+    "nl": "Display a image file `pathToFile`",
+    "cmd": "Image.open('pathToFile').show()",
+    "question_id": "5333244-64",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.urllib.request#open"
+    ],
+    "clean_cmd": "Image.open().show()",
+    "canonical_cmd": "Image.open('VAR_STR').show()"
+  },
+  {
+    "nl": "convert decimal `8` to binary list",
+    "cmd": "[int(x) for x in bin(8)[2:]]",
+    "question_id": "13557937-95",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#bin",
+      "python.library.functions#int"
+    ],
+    "clean_cmd": "[int(x)  x  bin()[:]]",
+    "canonical_cmd": "[int(x) for x in bin(8)[2:]]"
+  },
+  {
+    "nl": "Rename a folder `Joe Blow` to `Blow, Joe`",
+    "cmd": "os.rename('Joe Blow', 'Blow, Joe')",
+    "question_id": "8735312-37",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.rename"
+    ],
+    "clean_cmd": "os.rename(, )",
+    "canonical_cmd": "os.rename('VAR_STR', 'VAR_STR')"
+  },
+  {
+    "nl": "create a 2D array of `Node` objects with dimensions `cols` columns and `rows` rows",
+    "cmd": "nodes = [[Node() for j in range(cols)] for i in range(rows)]",
+    "question_id": "6480441-53",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#range",
+      "python.library.platform#platform.node"
+    ],
+    "clean_cmd": "nodes = [[Node()  j  range(cols)]  i  range(rows)]",
+    "canonical_cmd": "nodes = [[VAR_STR() for j in range(VAR_STR)] for i in range(VAR_STR)]"
+  },
+  {
+    "nl": "get the indexes of the x and y axes in Numpy array `np` where variable `a` is equal to variable `value`",
+    "cmd": "i, j = np.where(a == value)",
+    "question_id": "18079029-69",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.where"
+    ],
+    "clean_cmd": "i, j = np.where(a == value)",
+    "canonical_cmd": "i, j = VAR_STR.where(VAR_STR == VAR_STR)"
+  },
+  {
+    "nl": "Convert a binary value '1633837924' to string",
+    "cmd": "struct.pack('<I', 1633837924)",
+    "question_id": "33769531-95",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.struct#struct.pack"
+    ],
+    "clean_cmd": "struct.pack(, )",
+    "canonical_cmd": "struct.pack('<I', 1633837924)"
+  },
+  {
+    "nl": "get rows of dataframe `df` where column `Col1` has values `['men', 'rocks', 'mountains']`",
+    "cmd": "df[df.Col1.isin(['men', 'rocks', 'mountains'])]",
+    "question_id": "39988589-27",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.isin"
+    ],
+    "clean_cmd": "df[df.Col1.isin([, , ])]",
+    "canonical_cmd": "VAR_STR[VAR_STR.VAR_STR.isin([VAR_STR])]"
+  },
+  {
+    "nl": "print current date and time in a regular format",
+    "cmd": "datetime.datetime.now().strftime('%Y-%m-%d %H:%M')",
+    "question_id": "311627-6",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.datetime#datetime.datetime.now",
+      "python.library.datetime#datetime.datetime.strftime"
+    ],
+    "clean_cmd": "datetime.datetime.now().strftime()",
+    "canonical_cmd": "datetime.datetime.now().strftime('%Y-%m-%d %H:%M')"
+  },
+  {
+    "nl": "reverse a list `array`",
+    "cmd": "reversed(array)",
+    "question_id": "3940128-54",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#reversed"
+    ],
+    "clean_cmd": "reversed(array)",
+    "canonical_cmd": "reversed(VAR_STR)"
+  },
+  {
+    "nl": "reverse a list `array`",
+    "cmd": "list(reversed(array))",
+    "question_id": "3940128-11",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#reversed",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "list(reversed(array))",
+    "canonical_cmd": "list(reversed(VAR_STR))"
+  },
+  {
+    "nl": "How do I create a LIST of unique random numbers?",
+    "cmd": "random.sample(list(range(100)), 10)",
+    "question_id": "9755538-3",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.random#random.sample",
+      "python.library.functions#range",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "random.sample(list(range()), )",
+    "canonical_cmd": "random.sample(list(range(100)), 10)"
+  },
+  {
+    "nl": "find the index of element closest to number 11.5 in list `a`",
+    "cmd": "min(enumerate(a), key=lambda x: abs(x[1] - 11.5))",
+    "question_id": "9706041-13",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#enumerate",
+      "python.library.functions#abs",
+      "python.library.functions#min"
+    ],
+    "clean_cmd": "min(enumerate(a), key= x: abs(x[] - 11.5))",
+    "canonical_cmd": "min(enumerate(VAR_STR), key=lambda x: abs(x[1] - 11.5))"
+  },
+  {
+    "nl": "create 4 numbers in range between 1 and 3",
+    "cmd": "print(np.linspace(1, 3, num=4, endpoint=False))",
+    "question_id": "31143732-11",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.linspace"
+    ],
+    "clean_cmd": "print(np.linspace(, , num=, endpoint=False))",
+    "canonical_cmd": "print(np.linspace(1, 3, num=4, endpoint=False))"
+  },
+  {
+    "nl": "Create numpy array of `5` numbers starting from `1` with interval of `3`",
+    "cmd": "print(np.linspace(1, 3, num=5))",
+    "question_id": "31143732-14",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.linspace"
+    ],
+    "clean_cmd": "print(np.linspace(, , num=))",
+    "canonical_cmd": "print(np.linspace(1, 3, num=5))"
+  },
+  {
+    "nl": "split list `mylist` into a list of lists whose elements have the same first five characters",
+    "cmd": "[list(v) for k, v in itertools.groupby(mylist, key=lambda x: x[:5])]",
+    "question_id": "13368723-57",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.itertools#itertools.groupby",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "[list(v)  k, v  itertools.groupby(mylist, key= x: x[:])]",
+    "canonical_cmd": "[list(v) for k, v in itertools.groupby(VAR_STR, key=lambda x: x[:5])]"
+  },
+  {
+    "nl": "find the minimum value in a numpy array `arr` excluding 0",
+    "cmd": "arr[arr != 0].min()",
+    "question_id": "11764260-82",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#min"
+    ],
+    "clean_cmd": "arr[arr != ].min()",
+    "canonical_cmd": "VAR_STR[VAR_STR != 0].min()"
+  },
+  {
+    "nl": "Retrieve an arbitrary value from dictionary `dict`",
+    "cmd": "next(iter(dict.values()))",
+    "question_id": "3097866-25",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict.values",
+      "python.library.functions#iter",
+      "python.library.functions#next"
+    ],
+    "clean_cmd": "next(iter(dict.values()))",
+    "canonical_cmd": "next(iter(VAR_STR.values()))"
+  },
+  {
+    "nl": "access an arbitrary value from dictionary `dict`",
+    "cmd": "next(iter(list(dict.values())))",
+    "question_id": "3097866-93",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#dict.values",
+      "python.library.functions#iter",
+      "python.library.functions#next",
+      "python.library.functions#list"
+    ],
+    "clean_cmd": "next(iter(list(dict.values())))",
+    "canonical_cmd": "next(iter(list(VAR_STR.values())))"
+  },
+  {
+    "nl": "rearrange tuple of tuples `t`",
+    "cmd": "tuple(zip(*t))",
+    "question_id": "16040156-42",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#zip",
+      "python.library.functions#tuple"
+    ],
+    "clean_cmd": "tuple(zip(*t))",
+    "canonical_cmd": "tuple(zip(*VAR_STR))"
+  },
+  {
+    "nl": "read a single character from stdin",
+    "cmd": "sys.stdin.read(1)",
+    "question_id": "510357-53",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "sys.stdin.read()",
+    "canonical_cmd": "sys.stdin.read(1)"
+  },
+  {
+    "nl": "Get a list values of a dictionary item `pass_id` from post requests in django",
+    "cmd": "request.POST.getlist('pass_id')",
+    "question_id": "5430470-56",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.cgi#cgi.FieldStorage.getlist"
+    ],
+    "clean_cmd": "request.POST.getlist()",
+    "canonical_cmd": "request.POST.getlist('VAR_STR')"
+  },
+  {
+    "nl": "get number in list `myList` closest in value to number `myNumber`",
+    "cmd": "min(myList, key=lambda x: abs(x - myNumber))",
+    "question_id": "12141150-81",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#abs",
+      "python.library.functions#min"
+    ],
+    "clean_cmd": "min(myList, key= x: abs(x - myNumber))",
+    "canonical_cmd": "min(VAR_STR, key=lambda x: abs(x - VAR_STR))"
+  },
+  {
+    "nl": "Concat each values in a tuple `(34.2424, -64.2344, 76.3534, 45.2344)` to get a string",
+    "cmd": "\"\"\"\"\"\".join(str(i) for i in (34.2424, -64.2344, 76.3534, 45.2344))",
+    "question_id": "17426386-88",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.stdtypes#str",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": ".join(str(i)  i  (34.2424, -64.2344, 76.3534, 45.2344))",
+    "canonical_cmd": "\"\"\"\"\"\".join(str(i) for i in (VAR_STR))"
+  },
+  {
+    "nl": "run the code contained in string \"print('Hello')\"",
+    "cmd": "eval(\"print('Hello')\")",
+    "question_id": "1015142-46",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#eval"
+    ],
+    "clean_cmd": "eval()",
+    "canonical_cmd": "eval('VAR_STR')"
+  },
+  {
+    "nl": "convert bytes string `s`  to an unsigned integer",
+    "cmd": "struct.unpack('>q', s)[0]",
+    "question_id": "4433017-13",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.struct#struct.unpack"
+    ],
+    "clean_cmd": "struct.unpack(, s)[]",
+    "canonical_cmd": "struct.unpack('>q', VAR_STR)[0]"
+  },
+  {
+    "nl": "Get a random string of length `length`",
+    "cmd": "return ''.join(random.choice(string.lowercase) for i in range(length))",
+    "question_id": "2030053-18",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.random#random.choice",
+      "python.library.functions#range",
+      "python.library.stdtypes#str.join"
+    ],
+    "clean_cmd": " .join(random.choice(string.lowercase)  i  range(length))",
+    "canonical_cmd": "return ''.join(random.choice(string.lowercase) for i in range(VAR_STR))"
+  },
+  {
+    "nl": "access the class variable `a_string` from a class object `test`",
+    "cmd": "getattr(test, a_string)",
+    "question_id": "13303100-52",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#getattr"
+    ],
+    "clean_cmd": "getattr(test, a_string)",
+    "canonical_cmd": "getattr(VAR_STR, VAR_STR)"
+  },
+  {
+    "nl": "disable abbreviation in argparse",
+    "cmd": "parser = argparse.ArgumentParser(allow_abbrev=False)",
+    "question_id": "10750802-58",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.argparse#argparse.ArgumentParser"
+    ],
+    "clean_cmd": "parser = argparse.ArgumentParser(allow_abbrev=False)",
+    "canonical_cmd": "parser = argparse.ArgumentParser(allow_abbrev=False)"
+  },
+  {
+    "nl": "get a dictionary in list `dicts` which key 'ratio' is closer to a global value 1.77672955975",
+    "cmd": "min(dicts, key=lambda x: (abs(1.77672955975 - x['ratio']), -x['pixels']))",
+    "question_id": "42442428-5",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#abs",
+      "python.library.functions#min"
+    ],
+    "clean_cmd": "min(dicts, key= x: (abs(1.77672955975 - x[]), -x[]))",
+    "canonical_cmd": "min(VAR_STR, key=lambda x: (abs(1.77672955975 - x['VAR_STR']), -x['pixels']))"
+  },
+  {
+    "nl": "copy the content of file 'file.txt' to file 'file2.txt'",
+    "cmd": "shutil.copy('file.txt', 'file2.txt')",
+    "question_id": "36875258-12",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.shutil#shutil.copy"
+    ],
+    "clean_cmd": "shutil.copy(, )",
+    "canonical_cmd": "shutil.copy('VAR_STR', 'VAR_STR')"
+  },
+  {
+    "nl": "Calling an external command \"echo Hello World\"",
+    "cmd": "print(subprocess.Popen('echo Hello World', shell=True, stdout=subprocess.PIPE).stdout.read())",
+    "question_id": "89228-69",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.subprocess#subprocess.Popen",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "print(subprocess.Popen(, shell=True, stdout=subprocess.PIPE).stdout.read())",
+    "canonical_cmd": "print(subprocess.Popen('VAR_STR', shell=True, stdout=subprocess.PIPE).stdout.\n    read())"
+  },
+  {
+    "nl": "Calling an external command \"echo Hello World\"",
+    "cmd": "print(os.popen('echo Hello World').read())",
+    "question_id": "89228-17",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.popen",
+      "python.library.os#os.read"
+    ],
+    "clean_cmd": "print(os.popen().read())",
+    "canonical_cmd": "print(os.popen('VAR_STR').read())"
+  },
+  {
+    "nl": "Calling an external command \"ls\"",
+    "cmd": "p = subprocess.Popen('ls', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\nfor line in p.stdout.readlines():\n    print(line, end=' ')\nretval = p.wait()",
+    "question_id": "89228-83",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.subprocess#subprocess.Popen",
+      "python.library.subprocess#subprocess.Popen.wait",
+      "python.library.io#io.IOBase.readlines"
+    ],
+    "clean_cmd": "p = subprocess.Popen(, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT) line  p.stdout.readlines():print(line, end=)retval = p.wait()",
+    "canonical_cmd": "p = subprocess.Popen('VAR_STR', shell=True, stdout=subprocess.PIPE, stderr=\n    subprocess.STDOUT)\nfor line in p.stdout.readlines():\n    print(line, end=' ')\nretval = p.wait()"
+  },
+  {
+    "nl": "convert numpy array into python list structure",
+    "cmd": "np.array([[1, 2, 3], [4, 5, 6]]).tolist()",
+    "question_id": "1966207-46",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "numpy.reference.generated.numpy.array",
+      "python.library.array#array.array.tolist"
+    ],
+    "clean_cmd": "np.array([[, , ], [, , ]]).tolist()",
+    "canonical_cmd": "np.array([[1, 2, 3], [4, 5, 6]]).tolist()"
+  },
+  {
+    "nl": "rename file `dir` to `dir` + '!'",
+    "cmd": "os.rename(dir, dir + '!')",
+    "question_id": "11816315-65",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.rename"
+    ],
+    "clean_cmd": "os.rename(dir, dir + )",
+    "canonical_cmd": "os.rename(VAR_STR, VAR_STR + 'VAR_STR')"
+  },
+  {
+    "nl": "find the current directory",
+    "cmd": "os.getcwd()",
+    "question_id": "5137497-38",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.getcwd"
+    ],
+    "clean_cmd": "os.getcwd()",
+    "canonical_cmd": "os.getcwd()"
+  },
+  {
+    "nl": "Find current directory",
+    "cmd": "cwd = os.getcwd()",
+    "question_id": "5137497-54",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.os#os.getcwd"
+    ],
+    "clean_cmd": "cwd = os.getcwd()",
+    "canonical_cmd": "cwd = os.getcwd()"
+  },
+  {
+    "nl": "use operations like max/min within a row to a dataframe 'd' in pandas",
+    "cmd": "d.apply(lambda row: min([row['A'], row['B']]) - row['C'], axis=1)",
+    "question_id": "12376863-62",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "python.library.functions#min"
+    ],
+    "clean_cmd": "d.apply( row: min([row[], row[]]) - row[], axis=)",
+    "canonical_cmd": "VAR_STR.apply(lambda row: min([row['A'], row['B']]) - row['C'], axis=1)"
+  },
+  {
+    "nl": "How to plot with x-axis at the top of the figure?",
+    "cmd": "ax.xaxis.set_ticks_position('top')",
+    "question_id": "8639973-88",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "matplotlib._as_gen.matplotlib.axis.xaxis.set_ticks_position"
+    ],
+    "clean_cmd": "ax.xaxis.set_ticks_position()",
+    "canonical_cmd": "ax.xaxis.set_ticks_position('top')"
+  },
+  {
+    "nl": "sum the column `positions` along the  other columns `stock`, `same1`, `same2` in a pandas data frame `df`",
+    "cmd": "df.groupby(['stock', 'same1', 'same2'], as_index=False)['positions'].sum()",
+    "question_id": "17166601-53",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.groupby",
+      "python.library.functions#sum"
+    ],
+    "clean_cmd": "df.groupby([, , ], as_index=False)[].sum()",
+    "canonical_cmd": "VAR_STR.groupby(['VAR_STR', 'VAR_STR', 'VAR_STR'], as_index=False)['VAR_STR'].sum()"
+  },
+  {
+    "nl": "Summing across rows of Pandas Dataframe",
+    "cmd": "df.groupby(['stock', 'same1', 'same2'])['positions'].sum().reset_index()",
+    "question_id": "17166601-28",
+    "cmd_name": "conala",
+    "oracle_man": [
+      "pandas.reference.api.pandas.dataframe.groupby",
+      "python.library.functions#sum",
+      "pandas.reference.api.pandas.dataframe.reset_index"
+    ],
+    "clean_cmd": "df.groupby([, , ])[].sum().reset_index()",
+    "canonical_cmd": "df.groupby(['stock', 'same1', 'same2'])['positions'].sum().reset_index()"
+  }
+]
