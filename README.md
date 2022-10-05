@@ -1,4 +1,4 @@
-# DocCoder: Generating Code by Retrieving and Reading Code Docs
+# DocPrompting: Generating Code by Retrieving the Docs
 [[Paper]](https://arxiv.org/pdf/2207.05987.pdf)
 ## Code
 Code comming soon.
