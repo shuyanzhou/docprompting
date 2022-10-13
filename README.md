@@ -23,8 +23,8 @@ On each dataset, we provide
 ## Citation
 ```
 @article{zhou22doccoder,
-    title = {DocCoder: Generating Code by Retrieving and Reading Code Docs},
-    author = {Shuyan Zhou and Uri Alon and Frank F. Xu and Zhengbao Jiang and Graham Neubig},
+    title = {DocPrompting: Generating Code by Retrieving the Docs},
+    author = {Shuyan Zhou and Uri Alon and Frank F. Xu and Zhiruo Wang and Zhengbao Jiang and Graham Neubig},
     year = {2022},
     url = {https://arxiv.org/pdf/2207.05987.pdf}
 }
