@@ -180,7 +180,7 @@ On each dataset, we provide
 3. Oracle docs (entry `oracle_man`) 
   * In the data files, we only provide the manual ids, their contents could be found in the `{dataset}/{dataset}_docs.json`.
 4. Other data with different format for different modules
-5. 
+
 ## Resources 
 * [tldr](https://github.com/tldr-pages/tldr) Github repo. Thanks for all the contributors!
 * [CoNaLa](https://conala-corpus.github.io)
