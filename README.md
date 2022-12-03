@@ -6,11 +6,22 @@ This makes it impossible for models of code to keep current with all available A
 on existing code repositories. 
 we introduce DocPrompting: a natural-language-to-code generation approach that explicitly leverages documentation by (1) retrieving the relevant documentation pieces given an NL intent, 
 and (2) generating code based on the NL intent and the retrieved documentation. 
-DocPrompting has two main components (1) a retriever and (2) a generator which can be instantiated with different implementations.
 
 In the current version, we provide the *best* model on each setting.
 
 ![overview](media/overview.png)
+
+## Table of content
+* [Preparation](#preparation)
+* [Retrieval](#retrieval)
+  + [Dense retrieval](#dense-retrieval)
+  + [Sparse retrieval](#sparse-retrieval)
+* [Generation](#generation)
+  + [FID generation](#fid-generation)
+* [Data](#data)
+* [Resources](#resources)
+* [Citation](#citation)
+
 
 ## Preparation
 Download data for `CoNaLa` and `tldr` from [link](https://drive.google.com/file/d/1CzNlo8-e4XqrgAME5zHEWEKIQMPga0xl/view?usp=sharing)
@@ -180,7 +191,7 @@ On each dataset, we provide
 3. Oracle docs (entry `oracle_man`) 
   * In the data files, we only provide the manual ids, their contents could be found in the `{dataset}/{dataset}_docs.json`.
 4. Other data with different format for different modules
-5. 
+
 ## Resources 
 * [tldr](https://github.com/tldr-pages/tldr) Github repo. Thanks for all the contributors!
 * [CoNaLa](https://conala-corpus.github.io)
