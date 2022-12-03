@@ -200,7 +200,7 @@ On each dataset, we provide
 ```
 @article{zhou22docprompting,
     title = {# DocPrompting: Generating Code by Retrieving the Docs},
-    author = {Shuyan Zhou and Uri Alon and Frank F. Xu and and Zhiruo Wang and Zhengbao Jiang and Graham Neubig},
+    author = {Shuyan Zhou and Uri Alon and Frank F. Xu and Zhiruo Wang and Zhengbao Jiang and Graham Neubig},
     year = {2022}
 }
 ```
