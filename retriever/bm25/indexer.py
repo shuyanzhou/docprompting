@@ -7,8 +7,12 @@ import logging
 logging.getLogger('elasticsearch').setLevel(logging.ERROR)
 
 class ESSearch:
-    def __init__(self, index: str, source: str, re_index=False, manual_path=None, func_descpt_path=None):
-        self.es = Elasticsearch(timeout=60, host='metis.lti.cs.cmu.edu')
+    def __init__(self, index: str, source: str,
+                 host_address: str='localhost',
+                 re_index=False,
+                 manual_path=None,
+                 func_descpt_path=None):
+        self.es = Elasticsearch(timeout=60, host=host_address)
         self.source = source
         self.index = f"{index}.{source}"
         self.manual_path = manual_path

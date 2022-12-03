@@ -8,8 +8,11 @@ from indexer import ESSearch
 from retriever.eval import calc_recall, calc_hit, eval_retrieval_from_file
 import argparse
 
-def retrieve_manual(test_file, source, index, search_conf, saved_file, top_k=10):
-    indexer = ESSearch(index, source, re_index=False)
+def retrieve_manual(test_file, source, index, host, search_conf, saved_file, top_k=10):
+    indexer = ESSearch(index,
+                       source,
+                       host_address=host,
+                       re_index=False)
 
     query_type, search_field = search_conf['query'], search_conf['field']
     tag = f"{index}.{query_type}.{search_field}"
@@ -39,10 +42,10 @@ def retrieve_manual(test_file, source, index, search_conf, saved_file, top_k=10)
     return saved_file
 
 
-def doc_base_retrieval(index, source, r1_result_file,
+def doc_base_retrieval(index, source, host, r1_result_file,
                        retrieval_entry, saved_file, top_k_doc,
                        top_k_result, oracle_only=False):
-    indexer = ESSearch(index, source, re_index=False)
+    indexer = ESSearch(index, source, host, re_index=False)
 
     print(f"index: {index}")
     print(f"r1 file: {r1_result_file}")
@@ -127,6 +130,8 @@ def config():
                         default='cmd_dev',
                         help='which data split to run')
 
+    parser.add_argument('--host', type=str, default='localhost')
+
     args = parser.parse_args()
     return args
 
@@ -134,16 +139,19 @@ if __name__ == "__main__":
     args = config()
     stage = args.retrieval_stage
     split = args.split
+    host = args.host
     if stage == 0: # build the index
         index = "bash_man_whole"
         source = "chunk"
-        _ = ESSearch(index, source, re_index=True, manual_path='data/tldr/manual_all_raw.json',
-                           func_descpt_path=None)
+        _ = ESSearch(index, source, host_address=host,
+                     re_index=True, manual_path='data/tldr/manual_all_raw.json',
+                     func_descpt_path=None)
 
         index = "bash_man_para"
         source = "chunk"
-        indexer = ESSearch(index, source, re_index=True, manual_path='data/tldr/manual_section.json',
-                            func_descpt_path=None)
+        indexer = ESSearch(index, source, host_address=host,
+                           re_index=True, manual_path='data/tldr/manual_section.json',
+                           func_descpt_path=None)
 
     if stage == 1:
         index = 'bash_man_whole' # in the first stage, use the whole bash manual to retrieve the bash commands
@@ -158,7 +166,7 @@ if __name__ == "__main__":
         real_save_file = save_file.replace(".json", f".{tag}.json")
 
         if not os.path.exists(real_save_file):
-            _ = retrieve_manual(data_file, source, index, search_config_1, save_file, top_k=35)
+            _ = retrieve_manual(data_file, source, index, host, search_config_1, save_file, top_k=35)
 
         with open(real_save_file, 'r') as f:
             d = json.load(f)
@@ -185,7 +193,9 @@ if __name__ == "__main__":
         r2_save_file = r1_save_file.replace(".json", f".r2-{r2_index}.json")
 
         if not os.path.exists(r2_save_file):
-            _ = doc_base_retrieval(r2_index, source,
+            _ = doc_base_retrieval(r2_index,
+                                   source,
+                                   host,
                                    r1_save_file,
                                    f'{r1_tag}.retrieved',
                                    r2_save_file,
