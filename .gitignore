@@ -1,2 +1,6 @@
+models/generator/*
 models/retriever/*
 **/.DS_Store
+data/.DS_Store
+data/*
+.idea

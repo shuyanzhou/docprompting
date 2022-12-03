@@ -1,7 +1,33 @@
 # DocPrompting: Generating Code by Retrieving the Docs
+[[paper]](https://arxiv.org/pdf/2207.05987.pdf) [[openreview]](https://openreview.net/forum?id=ZTCxT2t2Ru)
 
+Publicly available source-code libraries are continuously growing and changing. 
+This makes it impossible for models of code to keep current with all available APIs by simply training these models 
+on existing code repositories. 
+we introduce DocPrompting: a natural-language-to-code generation approach that explicitly leverages documentation by (1) retrieving the relevant documentation pieces given an NL intent, 
+and (2) generating code based on the NL intent and the retrieved documentation. 
 DocPrompting has two main components (1) a retriever and (2) a generator which can be instantiated with different implementations.
+
 In the current version, we provide the *best* model on each setting.
+
+![overview](media/overview.png)
+
+## Preparation
+Download data for `CoNaLa` and `tldr` from [link](https://drive.google.com/file/d/1CzNlo8-e4XqrgAME5zHEWEKIQMPga0xl/view?usp=sharing)
+```bash
+# unzip
+unzip docprompting_data.zip
+# move to the data folder
+mv docprompting_data/* data
+```
+
+Download trained generator weights from [link](https://drive.google.com/file/d/1NmPMxY1EOWkjM7S8VSKa13DKJmEZ3TqV/view?usp=sharing)
+```bash
+unzip docprompting_generator_models.zip
+# move to the model folder
+mv docprompting_generator_models/* models/generator
+
+```
 ## Retrieval
 ### Dense retrieval 
 (`CoNaLa` as an example)
@@ -152,10 +178,11 @@ On each dataset, we provide
   * Bash for tldr
   * Python for CoNaLa
 3. Oracle docs (entry `oracle_man`) 
-  * In the data files, we only provide the manual ids, their contents could be found in the `{tldr, conala}_docs.json` of `docs.zip`.
-
+  * In the data files, we only provide the manual ids, their contents could be found in the `{dataset}/{dataset}_docs.json`.
+4. Other data with different format for different modules
+5. 
 ## Resources 
-* [tldr](https://github.com/tldr-pages/tldr) github repo
+* [tldr](https://github.com/tldr-pages/tldr) Github repo. Thanks for all the contributors!
 * [CoNaLa](https://conala-corpus.github.io)
 
 ## Citation
