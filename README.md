@@ -124,7 +124,7 @@ A training or evaluation file should be converted to the format compatible with 
 An example is [here](./data/conala/example_fid_data.json)
 > **Warning**: FiD has a strong dependency on the version of `transformers` (3.0.2).
 > Unable to match the version might result in inreproducible results.
-1. Run generation. Here is an example with our [trained model] on Python CoNaLa(./models/generator/)
+1. Run generation. Here is an example with our [trained model](./models/generator/) on Python CoNaLa
 ```bash
 ds='conala'
 python generator/fid/test_reader_simple.py \
