@@ -1,0 +1,20 @@
+Potential document 0: python datetime datetime strptime: classmethod datetime.strptime(date_string, format)   Return a datetime corresponding to date_string, parsed according to format. This is equivalent to: datetime(*(time.strptime(date_string, format)[0:6]))  ValueError is raised if the date_string and format can’t be parsed by time.strptime() or if it returns a value which isn’t a time tuple. For a complete list of formatting directives, see strftime() and strptime() Behavior.
+# convert string '2011221' into a DateTime object using format '%Y%W%w'
+datetime.strptime('2011221', '%Y%W%w')
+
+#END
+
+Potential document 0: python sorted: sorted(iterable, *, key=None, reverse=False)   Return a new sorted list from the items in iterable. Has two optional arguments which must be specified as keyword arguments. key specifies a function of one argument that is used to extract a comparison key from each element in iterable (for example, key=str.lower). The default value is None (compare the elements directly). reverse is a boolean value. If set to True, then the list elements are sorted as if each comparison were reversed. Use functools.cmp_to_key() to convert an old-style cmp function to a key function. The built-in sorted() function is guaranteed to be stable. A sort
+Potential document 1: python str startswith: str.startswith(prefix[, start[, end]])   Return True if string starts with the prefix, otherwise return False. prefix can also be a tuple of prefixes to look for. With optional start, test string beginning at that position. With optional end, stop comparing string at that position.
+# Sort a list of strings 'words' such that items starting with 's' come first.
+sorted(words, key=lambda x: 'a' + x if x.startswith('s') else 'b' + x)
+
+#END
+
+Potential document 0: pandas dataframe fillna: pandas.DataFrame.fillna   DataFrame.fillna(value=None, method=None, axis=None, inplace=False, limit=None, downcast=None)[source]   Fill NA/NaN values using the specified method.  Parameters    value:scalar, dict, Series, or DataFrame   Value to use to fill holes (e.g. 0), alternately a dict/Series/DataFrame of values specifying which value to use for each index (for a Series) or column (for a DataFrame). Values not in the dict/Series/DataFrame will not be filled. This value cannot be a list.   
+Potential document 1: pandas dataframe loc: pandas.DataFrame.loc   propertyDataFrame.loc   Access a group of rows and columns by label(s) or a boolean array..loc[] is primarily label based, but may also be used with a boolean array. Allowed inputs are:  A single label, e.g. 5 or 'a', (note that 5 is interpreted as a label of the index, and never as an integer position along the index). A list or array of labels, e.g. ['a', 'b', 'c'].  A slice object with labels, e.g. 'a':'f'.  Warning Note that contrary to usual python slices, both the start and the stop
+# replace all the nan values with 0 in a pandas dataframe `df`
+df.fillna(0)
+
+#END
+

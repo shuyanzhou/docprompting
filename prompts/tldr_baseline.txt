@@ -1,0 +1,18 @@
+Potential document 0: manual: manual
+# get the label of a fat32 partition
+fatlabel {{/dev/sda1}}
+
+#END
+
+Potential document 0: manual: manual
+# display information without including the login, jcpu and pcpu columns
+w --short
+
+#END
+
+Potential document 0: manual: manual
+# sort a csv file by column 9
+csvsort -c {{9}} {{data.csv}}
+
+#END
+

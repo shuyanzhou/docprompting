@@ -1,0 +1,15 @@
+# convert string '2011221' into a DateTime object using format '%Y%W%w'
+datetime.strptime('2011221', '%Y%W%w')
+
+#END
+
+# Sort a list of strings 'words' such that items starting with 's' come first.
+sorted(words, key=lambda x: 'a' + x if x.startswith('s') else 'b' + x)
+
+#END
+
+# replace all the nan values with 0 in a pandas dataframe `df`
+df.fillna(0)
+
+#END
+
