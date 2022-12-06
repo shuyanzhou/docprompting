@@ -1,5 +1,5 @@
 # DocPrompting: Generating Code by Retrieving the Docs
-[[paper]](https://arxiv.org/pdf/2207.05987.pdf) [[openreview]](https://openreview.net/forum?id=ZTCxT2t2Ru)
+[[paper]](https://arxiv.org/pdf/2207.05987.pdf)
 
 Publicly available source-code libraries are continuously growing and changing. 
 This makes it impossible for models of code to keep current with all available APIs by simply training these models 
