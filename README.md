@@ -122,7 +122,7 @@ python retriever/bm25/main.py \
 The code is based on [FiD](https://github.com/facebookresearch/FiD)
 A training or evaluation file should be converted to the format compatible with FiD. 
 An example is [here](./data/conala/example_fid_data.json)
-> **Warning**: FiD has a strong dependency on the version of `transformers` (3.0.2).
+> **Important note**: FiD has a strong dependency on the version of `transformers` (3.0.2).
 > Unable to match the version might result in inreproducible results.
 1. Run generation. Here is an example with our [trained model](./models/generator/) on Python CoNaLa
 ```bash
@@ -198,9 +198,10 @@ On each dataset, we provide
 
 ## Citation
 ```
-@article{zhou22docprompting,
-    title = {# DocPrompting: Generating Code by Retrieving the Docs},
-    author = {Shuyan Zhou and Uri Alon and Frank F. Xu and Zhiruo Wang and Zhengbao Jiang and Graham Neubig},
-    year = {2022}
+@article{zhou2022doccoder,
+  title={DocCoder: Generating Code by Retrieving and Reading Docs},
+  author={Zhou, Shuyan and Alon, Uri and Xu, Frank F and JIang, Zhengbao and Neubig, Graham},
+  journal={arXiv preprint arXiv:2207.05987},
+  year={2022}
 }
 ```
