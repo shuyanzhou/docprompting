@@ -218,7 +218,7 @@ On each dataset, we provide
 ```
 @article{zhou2022doccoder,
   title={DocCoder: Generating Code by Retrieving and Reading Docs},
-  author={Zhou, Shuyan and Alon, Uri and Xu, Frank F and JIang, Zhengbao and Neubig, Graham},
+  author={Zhou, Shuyan and Alon, Uri and Xu, Frank F and Jiang, Zhengbao and Neubig, Graham},
   journal={arXiv preprint arXiv:2207.05987},
   year={2022}
 }
