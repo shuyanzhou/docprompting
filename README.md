@@ -12,16 +12,34 @@ In the current version, we provide the *best* model on each setting.
 ![overview](media/overview.png)
 
 ## Table of content
-* [Preparation](#preparation)
-* [Retrieval](#retrieval)
-  + [Dense retrieval](#dense-retrieval)
-  + [Sparse retrieval](#sparse-retrieval)
-* [Generation](#generation)
-  + [FID generation](#fid-generation)
-* [Data](#data)
-* [Resources](#resources)
-* [Citation](#citation)
+- [Quick Dataset&Eval Access through 🤗](#huggingface----dataset---evaluation)
+- [Preparation](#preparation)
+- [Retrieval](#retrieval)
+  * [Dense retrieval](#dense-retrieval)
+  * [Sparse retrieval](#sparse-retrieval)
+- [Generation](#generation)
+  * [FID generation](#fid-generation)
+- [Data](#data)
+- [Resources](#resources)
+- [Citation](#citation)
 
+
+
+## Huggingface 🤗 Dataset & Evaluation
+In this work, we introduce a new natural language to bash generation benchmark `tldr` 
+and re-split `CoNaLa` to have *unseen* functions on the dev and test set.
+The datasets and the corresponding evaluations are available on huggingface
+* [tldr](https://huggingface.co/datasets/neulab/tldr) and [eval](https://huggingface.co/spaces/neulab/tldr_eval)
+* [CoNaLa](https://huggingface.co/spaces/neulab/python_bleu) and [eval](https://huggingface.co/datasets/neulab/tldr)
+```python
+import datasets
+import evaluate
+tldr = datasets.load_dataset('neulab/tldr')
+tldr_metric = evaluate.load('neulab/tldr_eval')
+
+conala = datasets.load_dataset('neulab/docprompting-conala')
+conala_metric = evaluate.load('neulab/python_bleu')
+```
 
 ## Preparation
 Download data for `CoNaLa` and `tldr` from [link](https://drive.google.com/file/d/1CzNlo8-e4XqrgAME5zHEWEKIQMPga0xl/view?usp=sharing)

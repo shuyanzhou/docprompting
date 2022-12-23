@@ -1,5 +1,7 @@
 models/generator/*
 models/retriever/*
+!models/generator/.placeholder
+!models/retriever/.placeholder
 **/.DS_Store
 data/.DS_Store
 data/*
