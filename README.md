@@ -30,7 +30,7 @@ In this work, we introduce a new natural language to bash generation benchmark `
 and re-split `CoNaLa` to have *unseen* functions on the dev and test set.
 The datasets and the corresponding evaluations are available on huggingface
 * [tldr](https://huggingface.co/datasets/neulab/tldr) and [eval](https://huggingface.co/spaces/neulab/tldr_eval)
-* [CoNaLa](https://huggingface.co/spaces/neulab/python_bleu) and [eval](https://huggingface.co/datasets/neulab/tldr)
+* [CoNaLa](https://huggingface.co/datasets/neulab/docprompting-conala) and [eval](https://huggingface.co/spaces/neulab/python_bleu)
 ```python
 import datasets
 import evaluate
