@@ -48,8 +48,8 @@ class FiDT5(transformers.T5ForConditionalGeneration):
 
     # We need to resize the inputs here, as the generate method expect 2D tensors
     def generate(self, input_ids, attention_mask, max_length,
-                 num_beams=10, num_return_sequences=10,
-                 temperature=0.8, top_p=0.95,
+                 num_beams=10, num_return_sequences=1,
+                 temperature=None, top_p=None,
                  lenpen=None):
         self.encoder.n_passages = input_ids.size(1)
         if num_beams != 1: # do beam search
