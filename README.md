@@ -19,8 +19,8 @@ In this repository we provide the *best* model in each setting described in the 
 ![overview](media/overview.png)
 
 ## Table of content
-- [Quick Dataset&Eval Access through 🤗](#huggingface----dataset---evaluation)
-- [Quick Models Loading 🤗](#huggingface----models)
+- [Quick Dataset&Eval Access through 🤗](#huggingface--dataset--evaluation)
+- [Quick Models Loading 🤗](#huggingface--models)
 - [Preparation](#preparation)
 - [Retrieval](#retrieval)
   * [Dense retrieval](#dense-retrieval)
