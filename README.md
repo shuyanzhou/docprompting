@@ -1,13 +1,20 @@
 # DocPrompting: Generating Code by Retrieving the Docs
-[[paper]](https://arxiv.org/pdf/2207.05987.pdf)
+This is the official implementation of 
+
+Shuyan Zhou, Uri Alon, Frank F. Xu, Zhiruo Wang, Zhengbao Jiang, Graham Neubig, ["DocPrompting: Generating Code by Retrieving the Docs"](https://arxiv.org/pdf/2207.05987.pdf),
+ICLR'2023 (**Spotlight**) 
+
+_**January 2023**_ - The paper was accepted to ICLR'2023 as a **Spotlight**! 
 
 Publicly available source-code libraries are continuously growing and changing. 
 This makes it impossible for models of code to keep current with all available APIs by simply training these models 
 on existing code repositories. 
-we introduce DocPrompting: a natural-language-to-code generation approach that explicitly leverages documentation by (1) retrieving the relevant documentation pieces given an NL intent, 
-and (2) generating code based on the NL intent and the retrieved documentation. 
+We introduce DocPrompting: a natural-language-to-code generation approach that explicitly leverages documentation by
+1. retrieving the relevant documentation pieces given an NL intent, 
+and
+2. generating code based on the NL intent and the retrieved documentation. 
 
-In the current version, we provide the *best* model on each setting.
+In this repository we provide the *best* model in each setting described in the paper.
 
 ![overview](media/overview.png)
 
