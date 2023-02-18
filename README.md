@@ -19,7 +19,8 @@ In this repository we provide the *best* model in each setting described in the 
 ![overview](media/overview.png)
 
 ## Table of content
-- [Quick Dataset&Eval Access through 🤗](#huggingface----dataset---evaluation)
+- [Quick Dataset&Eval Access through 🤗](#huggingface--dataset--evaluation)
+- [Quick Models Loading 🤗](#huggingface--models)
 - [Preparation](#preparation)
 - [Retrieval](#retrieval)
   * [Dense retrieval](#dense-retrieval)
@@ -46,6 +47,20 @@ tldr_metric = evaluate.load('neulab/tldr_eval')
 
 conala = datasets.load_dataset('neulab/docprompting-conala')
 conala_metric = evaluate.load('neulab/python_bleu')
+```
+
+## Huggingface 🤗 Models
+We make the following models available on Huggingface:
+
+**Retrievers**:
+* `neulab/docprompting-codet5-python-doc-retriever`
+
+Which can be loaded using:
+```python
+from transformers import AutoTokenizer, BERTScorerForCL
+
+tokenizer = AutoTokenizer.from_pretrained("neulab/docprompting-codet5-python-doc-retriever")
+model = BERTScorerForCL.from_pretrained("neulab/docprompting-codet5-python-doc-retriever")
 ```
 
 ## Preparation
