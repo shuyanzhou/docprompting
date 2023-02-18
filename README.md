@@ -6,6 +6,7 @@ ICLR'2023 (**Spotlight**)
 
 _**January 2023**_ - The paper was accepted to ICLR'2023 as a **Spotlight**! 
 
+---
 Publicly available source-code libraries are continuously growing and changing. 
 This makes it impossible for models of code to keep current with all available APIs by simply training these models 
 on existing code repositories. 
@@ -31,7 +32,7 @@ In this repository we provide the *best* model in each setting described in the 
 - [Resources](#resources)
 - [Citation](#citation)
 
-
+---
 
 ## Huggingface 🤗 Dataset & Evaluation
 In this work, we introduce a new natural language to bash generation benchmark `tldr` 
@@ -52,16 +53,52 @@ conala_metric = evaluate.load('neulab/python_bleu')
 ## Huggingface 🤗 Models
 We make the following models available on Huggingface:
 
-**Retrievers**:
-* `neulab/docprompting-codet5-python-doc-retriever`
+* neulab/docprompting-tldr-gpt-neo-125M
+* neulab/docprompting-tldr-gpt-neo-1.3B
 
-Which can be loaded using:
+Example usage:
 ```python
-from transformers import AutoTokenizer, BERTScorerForCL
+from transformers import AutoTokenizer, AutoModelForCausalLM
+tokenizer = AutoTokenizer.from_pretrained("neulab/docprompting-tldr-gpt-neo-125M")
+model = AutoModelForCausalLM.from_pretrained("neulab/docprompting-tldr-gpt-neo-125M")
 
-tokenizer = AutoTokenizer.from_pretrained("neulab/docprompting-codet5-python-doc-retriever")
-model = BERTScorerForCL.from_pretrained("neulab/docprompting-codet5-python-doc-retriever")
+# prompt template
+prompt = f"""{tokenizer.bos_token} Potential manual 0: makepkg - package build utility
+Potential manual 1: -c, --clean Clean up leftover work files and directories after a successful build.
+Potential manual 2: -r, --rmdeps Upon successful build, remove any dependencies installed by makepkg during dependency auto-resolution and installation when using -s
+Potential manual 3: CONTENT_OF_THE_MANUAL_3
+...
+Potential manual 10: CONTENT_OF_THE_MANUAL_10"""
+prompt += f"{tokenizer.sep_token} clean up work directories after a successful build {tokenizer.sep_token}"
+
+input_ids = tokenizer(prompt, return_tensors="pt").input_ids
+gen_tokens = model.generate(
+    input_ids,
+    num_beams=5,
+    max_new_tokens=150,
+    num_return_sequences=2,
+    pad_token_id=tokenizer.eos_token_id
+)
+gen_tokens = gen_tokens.reshape(1, -1, gen_tokens.shape[-1])[0][0]
+# to text and clean
+gen_code = tokenizer.decode(gen_tokens)
+gen_code = gen_code.split(tokenizer.sep_token)[2].strip().split(tokenizer.eos_token)[0].strip()
+print(gen_code)
+
+>>> makepkg --clean {{path/to/directory}}
+"""
+
+An example script on tldr by using the retrieved docs is in ()[.]
 ```
+
+Other models require the customized implementations in our repo, please read through the corresponding sections to use them. These models are:
+1. sparse retriever based on BM25 for `tldr`
+2. dense retriever based on CodeT5 for `CoNaLa`
+3. FiD T5 generator for `tldr`
+4. FiD CodeT5 generator for `CoNaLa`
+
+---
+>The following instructions are for reproducing the results in the paper.
 
 ## Preparation
 Download data for `CoNaLa` and `tldr` from [link](https://drive.google.com/file/d/1CzNlo8-e4XqrgAME5zHEWEKIQMPga0xl/view?usp=sharing)
@@ -238,10 +275,13 @@ On each dataset, we provide
 
 ## Citation
 ```
-@article{zhou2022doccoder,
-  title={DocCoder: Generating Code by Retrieving and Reading Docs},
-  author={Zhou, Shuyan and Alon, Uri and Xu, Frank F and Jiang, Zhengbao and Neubig, Graham},
-  journal={arXiv preprint arXiv:2207.05987},
-  year={2022}
+@inproceedings{zhou23docprompting,
+    title = {DocPrompting: Generating Code by Retrieving the Docs},
+    author = {Shuyan Zhou and Uri Alon and Frank F. Xu and Zhiruo Wang and Zhengbao Jiang and Graham Neubig},
+    booktitle = {International Conference on Learning Representations (ICLR)},
+    address = {Kigali, Rwanda},
+    month = {May},
+    url = {https://arxiv.org/abs/2207.05987},
+    year = {2023}
 }
 ```
