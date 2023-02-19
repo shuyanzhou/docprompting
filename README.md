@@ -56,11 +56,11 @@ We make the following models available on Huggingface:
 * neulab/docprompting-tldr-gpt-neo-125M
 * neulab/docprompting-tldr-gpt-neo-1.3B
 
-Example usage:
+### Example usage
 ```python
 from transformers import AutoTokenizer, AutoModelForCausalLM
-tokenizer = AutoTokenizer.from_pretrained("neulab/docprompting-tldr-gpt-neo-125M")
-model = AutoModelForCausalLM.from_pretrained("neulab/docprompting-tldr-gpt-neo-125M")
+tokenizer = AutoTokenizer.from_pretrained("neulab/docprompting-tldr-gpt-neo-1.3B")
+model = AutoModelForCausalLM.from_pretrained("neulab/docprompting-tldr-gpt-neo-1.3B")
 
 # prompt template
 prompt = f"""{tokenizer.bos_token} Potential manual 0: makepkg - package build utility
@@ -86,11 +86,12 @@ gen_code = gen_code.split(tokenizer.sep_token)[2].strip().split(tokenizer.eos_to
 print(gen_code)
 
 >>> makepkg --clean {{path/to/directory}}
-"""
-
-An example script on tldr by using the retrieved docs is in ()[.]
 ```
 
+### Example script 
+An example script on tldr by using the retrieved docs is [here](./scripts/tldr_gpt_neo.py)
+
+### Other models
 Other models require the customized implementations in our repo, please read through the corresponding sections to use them. These models are:
 1. sparse retriever based on BM25 for `tldr`
 2. dense retriever based on CodeT5 for `CoNaLa`
