@@ -218,6 +218,30 @@ python generator/fid/test_reader_simple.py \
 ```
 The results will be saved to `models/generator/{name}/test_results_test_same.json`
 
+ To evaluate `pass@k`, we need more generations, we use nucleus sampling (instead of beam search) for the generation. 
+ ```bash
+ ds='conala'
+ t=1.0 # set this from 0.2, 0.4, 0.6, .. 1.0. Use the dev set to find the best temperature
+ python generator/fid/test_reader_simple.py \
+    --model_path models/generator/${ds}.fid.codet5.top10/checkpoint/best_dev \
+    --tokenizer_name models/generator/codet5-base \
+    --eval_data data/${ds}/fid.cmd_test.codet5.t10.ns200.json \
+    --per_gpu_batch_size 8 \
+    --n_context 10 \
+    --name ${ds}.fid.codet5.top10.ns200 \
+    --checkpoint_dir models/generator  \
+    --result_tag test_same \
+    --num_beams 1 \
+    --temperature $t \
+    --top_p 0.95 \
+    --num_return_sequences 200 \
+    --main_port 81692
+ ```
+ Then run this [script](./dataset_helper/conala/execution_eval.py)
+ ```bash
+ python dataset_helper/conala/execution_eval.py --result_file data/${ds}/fid.cmd_test.codet5.t10.ns200.json
+ ```
+
 2. Train your own generator
 ```bash
 ds='conala'
