@@ -96,7 +96,7 @@ The results will be saved to `data/conala/retrieval_results.json`.
 A training or evaluation file should be converted to the format compatible with FiD. 
 An example is [here](./data/conala/example_fid_data.json)
 > **Important note**: FiD has a strong dependency on the version of `transformers` (3.0.2).
-> Unable to match the version might result in inreproducible results.
+> Unable to match the version might result in irreproducible results.
 > 
 1. Run generation.
    
