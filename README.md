@@ -182,6 +182,32 @@ python generator/fid/train_reader.py \
     --total_steps 20000 \
 ```
 ---
+
+### For StarCoder as Generator
+
+```bash
+ds='conala'
+python generator/fid/train_reader_starcoder.py
+    --seed 1996 \
+    --train_data data/${ds}/fid.cmd_train.codet5.t10.json \
+    --eval_data data/${ds}/fid.cmd_dev.codet5.t10.json \
+    --model_name bigcode/starcoder \
+    --per_gpu_batch_size 4 \
+    --n_context 10 \
+    --name ${ds}.fid.codet5.top10 \
+    --checkpoint_dir models/generator/ \
+    --eval_freq 500 \
+    --accumulation_steps 2 \
+    --main_port 30843 \
+    --total_steps 20000 \
+    --warmup_steps 2000 \
+```
+Note: StarCoder is a Gated Model, to be able to access and use it, please use the steps below:
+a) Accept the license agreement on https://huggingface.co/bigcode/starcoder
+b) Get access token for starcoder from https://huggingface.co/settings/tokens
+c) Run 'huggingface-cli login' and use token obtained in step b above.
+
+---
 ## Data
 The `data` folder contains the benchmark used.
 * CoNaLa
