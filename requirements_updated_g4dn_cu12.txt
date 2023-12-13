@@ -1,0 +1,5 @@
+faiss-cpu
+numpy
+torch --index-url https://download.pytorch.org/whl/cu121
+transformers
+pandas
