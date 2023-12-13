@@ -203,8 +203,11 @@ python generator/fid/train_reader_starcoder.py
     --warmup_steps 2000 \
 ```
 Note: StarCoder is a Gated Model, to be able to access and use it, please use the steps below:
+
 a) Accept the license agreement on https://huggingface.co/bigcode/starcoder
+
 b) Get access token for starcoder from https://huggingface.co/settings/tokens
+
 c) Run 'huggingface-cli login' and use token obtained in step b above.
 
 ---
