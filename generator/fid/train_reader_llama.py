@@ -9,6 +9,8 @@ import os
 import time
 import sys
 import torch
+torch.cuda.empty_cache()
+
 # import torch.nn as nn
 
 # torch.cuda.set_device(5)
@@ -21,7 +23,7 @@ from torch.utils.data import DataLoader, RandomSampler, DistributedSampler, Sequ
 from tqdm import tqdm
 
 from dataset_helper.conala.gen_metric import _bleu as conala_bleu
-# from dataset_helper.tldr.gen_metric import tldr_metrics
+from dataset_helper.tldr.gen_metric import tldr_metrics
 from src.options import Options
 
 import src.slurm
@@ -29,9 +31,9 @@ import src.util
 import src.evaluation
 import src.data
 import src.model
-import wandb
+# import wandb
 
-WANDB_DISABLED= os.environ['WANDB_DISABLED'] if 'WANDB_DISABLED' in os.environ else False
+# WANDB_DISABLED= os.environ['WANDB_DISABLED'] if 'WANDB_DISABLED' in os.environ else False
 TQDM_DISABLED = os.environ['TQDM_DISABLED'] if 'TQDM_DISABLED' in os.environ else False
 
 def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, collator, best_dev_em, checkpoint_path):
@@ -67,11 +69,23 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
             opt._train_step = step
             (idx, labels, _, context_ids, context_mask) = batch
 
+            # train_loss = model(
+            #     input_ids=context_ids.cuda(),
+            #     attention_mask=context_mask.cuda(),
+            #     labels=labels.cuda()
+            # )[0]
+
+            # codellama
+            print("context_mask size", context_mask.size())
+            print(context_ids.size())
+            print(labels.size())
             train_loss = model(
-                input_ids=context_ids.cuda(),
-                attention_mask=context_mask.cuda(),
+                input_ids=context_ids.squeeze().cuda(),
+                attention_mask=context_mask.squeeze().cuda(),
                 labels=labels.cuda()
             )[0]
+
+            print("train loss calculated")
 
             # train_loss = model(
             #     input_ids=context_ids.to('cuda:5'),
@@ -89,11 +103,11 @@ def train(model, optimizer, scheduler, step, train_dataset, eval_dataset, opt, c
 
             train_loss = src.util.average_main(train_loss, opt)
             curr_loss += train_loss.item()
-            wandb.log({'train_loss': train_loss.item(), 'lr': scheduler.get_last_lr()[0]})
+            # wandb.log({'train_loss': train_loss.item(), 'lr': scheduler.get_last_lr()[0]})
 
             if step % opt.eval_freq == 0:
                 dev_em = evaluate(model, eval_dataset, tokenizer, collator, opt)
-                wandb.log({f'eval_{x}': y for x, y in dev_em.items()})
+                # wandb.log({f'eval_{x}': y for x, y in dev_em.items()})
                 dev_em = dev_em[opt.eval_metric]
                 model.train()
                 if opt.is_main:
@@ -245,8 +259,8 @@ if __name__ == "__main__":
     options.add_optim_options()
     opt = options.parse()
     print("options are", opt)
-    print("options save freq", opt.save_freq)
-    print("options eval frew", opt.eval_freq)
+    print("save freq is", opt.save_freq)
+    print("eval freq is", opt.eval_freq)
 
     #opt = options.get_options(use_reader=True, use_optim=True)
 
@@ -274,19 +288,20 @@ if __name__ == "__main__":
 
     # logger.info(json.dumps(vars(opt), indent=2))
 
-    if WANDB_DISABLED:
-        wandb.init(mode='disabled')
-    else:
-        if opt.is_main:
-            # is the master
-            wandb.init(project='fid')
-            wandb.config.update(opt)
-        else:
-            wandb.init(mode='disabled')
+    # if WANDB_DISABLED:
+    #     wandb.init(mode='disabled')
+    # else:
+    #     if opt.is_main:
+    #         # is the master
+    #         wandb.init(project='fid')
+    #         wandb.config.update(opt)
+    #     else:
+    #         wandb.init(mode='disabled')
 
     # model_name = 't5-' + opt.model_size
     model_name = opt.model_name
-    model_class = src.model.FiDT5
+    # codellama
+    # model_class = src.model.FiDT5
 
     # #load data
     # if 'codet5' in model_name or 'code_t5' in model_name:
@@ -302,14 +317,20 @@ if __name__ == "__main__":
     # codellama/CodeLlama-7b-hf
     logger.info(f'load the tokenizer from codellama')
     # tokenizer = transformers.RobertaTokenizer.from_pretrained(model_name)
+
+    # codellama
     tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
+    tokenizer.add_eos_token = True
+    tokenizer.pad_token_id = 0
+    tokenizer.padding_side = "left"
+    # tokenizer.pad_token = tokenizer.eos_token
     # else:
     #     logger.info(f'load the tokenizer from t5')
     #     tokenizer = transformers.T5Tokenizer.from_pretrained(model_name)
 
-    if opt.dataset == 'tldr':
-        special_tokens_dict = {'additional_special_tokens': ['{{', '}}']}
-        num_added_toks = tokenizer.add_special_tokens(special_tokens_dict)
+    # if opt.dataset == 'tldr':
+    #     special_tokens_dict = {'additional_special_tokens': ['{{', '}}']}
+    #     num_added_toks = tokenizer.add_special_tokens(special_tokens_dict)
 
     collator = src.data.Collator(opt.text_maxlength, tokenizer,
                                  answer_maxlength=opt.answer_maxlength)
@@ -330,12 +351,13 @@ if __name__ == "__main__":
     eval_dataset = src.data.Dataset(eval_examples, opt.n_context)
 
     if not opt.continue_from_checkpoint:
-        logger.info("init a model from T5")
+        # logger.info("init a model from T5")
         # t5 = transformers.T5ForConditionalGeneration.from_pretrained(model_name)
 
         # codellama
-        model = transformers.AutoModelForCausalLM.from_pretrained(model_name)
-        print("lulu", model.device)
+        logger.info("init a model from codellama")
+        model = transformers.AutoModelForCausalLM.from_pretrained(model_name, load_in_8bit=True,
+    torch_dtype=torch.float16,device_map="auto")
         # model = torch.nn.parallel.DistributedDataParallel(model)
         # model = model.to('cuda')
 
@@ -349,14 +371,14 @@ if __name__ == "__main__":
 
 
         # codellama
-        if tokenizer.pad_token is None:
-            tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-            model.resize_token_embeddings(len(tokenizer))
-        print("hi1")
+        # if tokenizer.pad_token is None:
+        #     tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+        # model.resize_token_embeddings(len(tokenizer))
+        print("cp 1")
 
         # none currently
         if opt.encoder_weights is not None:
-            print("hi2")
+            print("cp 2")
             state_dict = torch.load(f'{opt.encoder_weights}/pytorch_model.bin')
             # rename
             new_state_dict = {}
@@ -380,42 +402,42 @@ if __name__ == "__main__":
             t5.encoder.load_state_dict(new_state_dict, strict=False)
             logger.info(f'Loaded encoder weights from {opt.encoder_weights}')
 
-        print("hi3")
+        print("cp 3")
 
         # old
         # model = src.model.FiDT5(t5.config)
-        print("hi4")
+        print("cp 4")
         # codellama
         # why this do we need to
         # model.load_t5(t5.state_dict())
-        model.load_state_dict(model.state_dict())
-        print("hi5")
+        # model.load_state_dict(model.state_dict())
+        print("cp 5")
         # codellama
         print("local rank of opt", opt.local_rank)
-        model = model.to(opt.local_rank)
-        print("hi6")
+        # model = model.to(opt.local_rank)
+        print("cp 6")
         # codellama
         optimizer, scheduler = src.util.set_optim(opt, model)
         step, best_dev_em = 0, 0.0
     elif opt.model_path == "none" and opt.cont_from_checkpoint:
-        print("hi7")
+        print("cp 7")
         load_path = checkpoint_path / 'checkpoint' / 'latest'
         model, optimizer, scheduler, opt_checkpoint, step, best_dev_em = \
             src.util.load(model_class, load_path, opt, reset_params=False)
         logger.info(f"Model loaded from checkpoint {load_path}")
     else: # load from model path
-        print("hi8")
+        print("cp 8")
         model, optimizer, scheduler, opt_checkpoint, step, best_dev_em = \
             src.util.load(model_class, opt.model_path, opt, reset_params=True)
         logger.info(f"Model loaded from a model {opt.model_path}")
 
     # why this
-    print("hi9")
+    print("cp 9")
     # model.set_checkpoint(opt.use_checkpoint)
-    print("hi10")
+    print("cp 10")
 
     if opt.is_distributed:
-        print("hi11 distributed")
+        print("is distributed")
         model = torch.nn.parallel.DistributedDataParallel(
             model,
             device_ids=[opt.local_rank],
@@ -423,9 +445,9 @@ if __name__ == "__main__":
             find_unused_parameters=False,
         )
 
-    print("hi12")
+    print("cp 12")
     logger.info("Start training")
-    print("options main", opt.is_main)
+    # print("options main", opt.is_main)
     train(
         model,
         optimizer,
