@@ -99,11 +99,6 @@ The results will be saved to `data/conala/retrieval_results.json`.
 ---
 ## Generation code
 
-A training or evaluation file should be converted to the format compatible with FiD. 
-An example is [here](./data/conala/example_fid_data.json)
-> **Important note**: FiD has a strong dependency on the version of `transformers` (3.0.2).
-> Unable to match the version might result in irreproducible results.
-
 
 ### StarCoder generation
 
@@ -205,6 +200,11 @@ python retriever/simcse/run_train.py \
 ---
 
 ### Training the generator
+
+If using models like CodeT5 (FiD based) to replicate DocPrompting results, a training or evaluation file should be converted to a format compatible with FiD. 
+An example is [here](./data/conala/example_fid_data.json)
+> **Important note**: FiD has a strong dependency on the version of `transformers` (3.0.2).
+> Unable to match the version might result in irreproducible results.
 
 ```bash
 ds='conala'
