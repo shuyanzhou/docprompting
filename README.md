@@ -116,7 +116,7 @@ python generator/fid/train_reader_starcoder.py
     --model_name bigcode/starcoder \
     --per_gpu_batch_size 4 \
     --n_context 10 \
-    --name ${ds}.fid.codet5.top10 \
+    --name ${ds}.starcoder.top10 \
     --checkpoint_dir models/generator/ \
     --eval_freq 500 \
     --accumulation_steps 2 \
@@ -138,6 +138,23 @@ The results will be saved to `models/generator/{name}/test_results_test_same.jso
 
 ### CodeLlama generation
 
+```bash
+ds='conala'
+python generator/fid/train_reader_llama.py \
+    --seed 1996 \
+    --train_data data/${ds}/fid.cmd_train.codet5.t10.json \
+    --eval_data data/${ds}/fid.cmd_dev.codet5.t10.json \
+    --model_name codellama/CodeLlama-7b-Instruct-hf \
+    --per_gpu_batch_size 1 \
+    --n_context 10 \
+    --name ${ds}.codellama7.top10 \
+    --checkpoint_dir models/generator/ \
+    --eval_freq 500 \
+    --accumulation_steps 2 \
+    --main_port 30843 \
+    --total_steps 20000 \
+    --warmup_steps 2000
+```
 
 ---
 
