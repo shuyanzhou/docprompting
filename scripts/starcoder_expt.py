@@ -26,7 +26,7 @@ sequences = pipeline(
     temperature = 0.2,
     num_return_sequences=1,
     eos_token_id=tokenizer.eos_token_id,
-    max_length=1000, # can increase the length of sequence
+    max_length=200, # can increase the length of sequence
 )
 for seq in tqdm(sequences):
     print(f"Result: {seq['generated_text']}")
