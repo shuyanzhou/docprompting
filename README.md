@@ -15,26 +15,25 @@ In this repository, we dervie from the research paper titled DocPrompting -
 Shuyan Zhou, Uri Alon, Frank F. Xu, Zhiruo Wang, Zhengbao Jiang, Graham Neubig, ["DocPrompting: Generating Code by Retrieving the Docs"](https://arxiv.org/pdf/2207.05987.pdf),
 ICLR'2023 (**Spotlight**) 
 
-Based on this we have the following contributions -
-1. Evaluating docPrompting on SOTA generator architectures like StarCoder and CodeLlama
-2. Evaluating docPrompting on SOTA retrievor architectures like ColBERT
-
----
-
 Since publicly available source-code libraries are continuously growing and changing, this paper 
 introduces DocPrompting: a natural-language-to-code generation approach that explicitly leverages documentation by
 1. retrieving the relevant documentation pieces given an NL intent, 
 and
 2. generating code based on the NL intent and the retrieved documentation. 
 
+---
+
+Based on the above, we have the following contributions with LibraCode -
+1. Evaluating docPrompting on SOTA generator architectures like StarCoder and CodeLlama
+2. Experimenting with docPrompting on SOTA retriever architectures like ColBERT
 
 ---
 
 ## Experiment setup for A4
 
 1. With a specific focus on Python programs, we leveraged ODEX, a subset of the CoNaLa dataset.
-2. We chose to evaluate DocPrompting using CodeLlama and StarCoder as generator architectures.
-3. In addition, we investigate the integration of ColBERT as a retriever to assess potential enhancements in the quality of retrieved documents.
+2. We evaluated DocPrompting using CodeLlama and StarCoder as generator architectures.
+3. In addition, we investigated the integration of ColBERT as a retriever to assess potential enhancements in the quality of retrieved documents.
    
 ---
 
@@ -53,6 +52,7 @@ mv docprompting_data/* data
 ```
 
 Download trained generator weights from [link](https://drive.google.com/file/d/1NmPMxY1EOWkjM7S8VSKa13DKJmEZ3TqV/view?usp=sharing)
+(These are the models to reproduce A3 results. For A4, we load the models from HuggingFace and fine-tune them)
 ```bash
 unzip docprompting_generator_models.zip
 # move to the model folder
@@ -63,7 +63,7 @@ mv docprompting_generator_models/* models/generator
 
 1. Run all the cells in the notebook titled Retriever_ColBERT.ipynb.
 2. The last cell outlines in detail the recall@n and precision@n values for ColBERT.
-3. This notebook will also generate a retrieval_results.json, which can be downloaded and placed in data/conala/, after which generator code can be run.
+3. This notebook will also generate a retrieval_results.json, which can be downloaded and placed in data/conala/, after which the generator code can be run.
 
 ## Retrieval code (for CodeT5) 
 
@@ -126,8 +126,6 @@ a) Accept the license agreement on https://huggingface.co/bigcode/starcoder
 b) Get access token for starcoder from https://huggingface.co/settings/tokens
 
 c) Run 'huggingface-cli login' and use token obtained in step b above.
-
-The results will be saved to `models/generator/{name}/test_results_test_same.json`
 
 ---
 
