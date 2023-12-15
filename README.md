@@ -15,26 +15,25 @@ In this repository, we dervie from the research paper titled DocPrompting -
 Shuyan Zhou, Uri Alon, Frank F. Xu, Zhiruo Wang, Zhengbao Jiang, Graham Neubig, ["DocPrompting: Generating Code by Retrieving the Docs"](https://arxiv.org/pdf/2207.05987.pdf),
 ICLR'2023 (**Spotlight**) 
 
-Based on this we have the following contributions -
-1. Evaluating docPrompting on SOTA generator architectures like StarCoder and CodeLlama
-2. Evaluating docPrompting on SOTA retrievor architectures like ColBERT
-
----
-
 Since publicly available source-code libraries are continuously growing and changing, this paper 
 introduces DocPrompting: a natural-language-to-code generation approach that explicitly leverages documentation by
 1. retrieving the relevant documentation pieces given an NL intent, 
 and
 2. generating code based on the NL intent and the retrieved documentation. 
 
+---
+
+Based on the above, we have the following contributions with LibraCode -
+1. Evaluating docPrompting on SOTA generator architectures like StarCoder and CodeLlama
+2. Experimenting with docPrompting on SOTA retriever architectures like ColBERT
 
 ---
 
 ## Experiment setup for A4
 
 1. With a specific focus on Python programs, we leveraged ODEX, a subset of the CoNaLa dataset.
-2. We chose to evaluate DocPrompting using CodeLlama and StarCoder as generator architectures.
-3. In addition, we investigate the integration of ColBERT as a retriever to assess potential enhancements in the quality of retrieved documents.
+2. We evaluated DocPrompting using CodeLlama and StarCoder as generator architectures.
+3. In addition, we investigated the integration of ColBERT as a retriever to assess potential enhancements in the quality of retrieved documents.
    
 ---
 
@@ -53,6 +52,7 @@ mv docprompting_data/* data
 ```
 
 Download trained generator weights from [link](https://drive.google.com/file/d/1NmPMxY1EOWkjM7S8VSKa13DKJmEZ3TqV/view?usp=sharing)
+(These are the models to reproduce A3 results. For A4, we load the models from HuggingFace and fine-tune them)
 ```bash
 unzip docprompting_generator_models.zip
 # move to the model folder
@@ -63,7 +63,7 @@ mv docprompting_generator_models/* models/generator
 
 1. Run all the cells in the notebook titled Retriever_ColBERT.ipynb.
 2. The last cell outlines in detail the recall@n and precision@n values for ColBERT.
-3. This notebook will also generate a retrieval_results.json, which can be downloaded and placed in data/conala/, after which generator code can be run.
+3. This notebook will also generate a retrieval_results.json, which can be downloaded and placed in data/conala/, after which the generator code can be run.
 
 ## Retrieval code (for CodeT5) 
 
@@ -99,11 +99,6 @@ The results will be saved to `data/conala/retrieval_results.json`.
 ---
 ## Generation code
 
-A training or evaluation file should be converted to the format compatible with FiD. 
-An example is [here](./data/conala/example_fid_data.json)
-> **Important note**: FiD has a strong dependency on the version of `transformers` (3.0.2).
-> Unable to match the version might result in irreproducible results.
-
 
 ### StarCoder generation
 
@@ -116,7 +111,7 @@ python generator/fid/train_reader_starcoder.py
     --model_name bigcode/starcoder \
     --per_gpu_batch_size 4 \
     --n_context 10 \
-    --name ${ds}.fid.codet5.top10 \
+    --name ${ds}.starcoder.top10 \
     --checkpoint_dir models/generator/ \
     --eval_freq 500 \
     --accumulation_steps 2 \
@@ -132,12 +127,27 @@ b) Get access token for starcoder from https://huggingface.co/settings/tokens
 
 c) Run 'huggingface-cli login' and use token obtained in step b above.
 
-The results will be saved to `models/generator/{name}/test_results_test_same.json`
-
 ---
 
 ### CodeLlama generation
 
+```bash
+ds='conala'
+python generator/fid/train_reader_llama.py \
+    --seed 1996 \
+    --train_data data/${ds}/fid.cmd_train.codet5.t10.json \
+    --eval_data data/${ds}/fid.cmd_dev.codet5.t10.json \
+    --model_name codellama/CodeLlama-7b-Instruct-hf \
+    --per_gpu_batch_size 1 \
+    --n_context 10 \
+    --name ${ds}.codellama7.top10 \
+    --checkpoint_dir models/generator/ \
+    --eval_freq 500 \
+    --accumulation_steps 2 \
+    --main_port 30843 \
+    --total_steps 20000 \
+    --warmup_steps 2000
+```
 
 ---
 
@@ -188,6 +198,11 @@ python retriever/simcse/run_train.py \
 ---
 
 ### Training the generator
+
+If using models like CodeT5 (FiD based) to replicate DocPrompting results, a training or evaluation file should be converted to a format compatible with FiD. 
+An example is [here](./data/conala/example_fid_data.json)
+> **Important note**: FiD has a strong dependency on the version of `transformers` (3.0.2).
+> Unable to match the version might result in irreproducible results.
 
 ```bash
 ds='conala'
