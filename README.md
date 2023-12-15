@@ -97,10 +97,10 @@ python retriever/simcse/run_inference.py \
 The results will be saved to `data/conala/retrieval_results.json`.
 
 ---
-## Generation code
+## Generator code for finetuning
 
 
-### StarCoder generation
+### StarCoder finetuning
 
 ```bash
 ds='conala'
@@ -129,25 +129,13 @@ c) Run 'huggingface-cli login' and use token obtained in step b above.
 
 ---
 
-### CodeLlama generation
+### CodeLlama finetuning
 
-```bash
-ds='conala'
-python generator/fid/train_reader_llama.py \
-    --seed 1996 \
-    --train_data data/${ds}/fid.cmd_train.codet5.t10.json \
-    --eval_data data/${ds}/fid.cmd_dev.codet5.t10.json \
-    --model_name codellama/CodeLlama-7b-Instruct-hf \
-    --per_gpu_batch_size 1 \
-    --n_context 10 \
-    --name ${ds}.codellama7.top10 \
-    --checkpoint_dir models/generator/ \
-    --eval_freq 500 \
-    --accumulation_steps 2 \
-    --main_port 30843 \
-    --total_steps 20000 \
-    --warmup_steps 2000
-```
+Run the file python generator/fid/train_reader_llama_finetune.py
+
+In the file, initialize the train_dataset and eval_dataset variables to your train and evaluation dataset respectively. We have used a subset of the fid.cmd_train.codet5.t10.json and fid.cmd_dev.codet5.t10.json respectively and kept the fields 'question', 'context' from the original 'ctxs's text field, and 'answer' from 'target'.
+
+Running the file will save checkpoints in the folder 'code-llama-models'
 
 ---
 
