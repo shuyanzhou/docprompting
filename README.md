@@ -133,7 +133,7 @@ c) Run 'huggingface-cli login' and use token obtained in step b above.
 
 Run the file: python generator/fid/train_reader_llama_finetune.py
 
-In the file, initialize the train_dataset and eval_dataset variables to your train and evaluation dataset respectively. We have used a subset of the fid.cmd_train.codet5.t10.json and fid.cmd_dev.codet5.t10.json respectively and kept the fields 'question', 'context' from the original 'ctxs's text field, and 'answer' from 'target'. ie, in the following format -
+In the file, initialize the train_dataset and eval_dataset variables to your train and evaluation dataset respectively. We have used a subset of the fid.cmd_train.codet5.t10.json and fid.cmd_dev.codet5.t10.json respectively and kept the fields 'question', 'context' from the original 'ctxs's text field, and 'answer' from 'target'. That is, in the following format -
 
 ```
 [
