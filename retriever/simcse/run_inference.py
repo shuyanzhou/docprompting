@@ -11,9 +11,62 @@ import torch
 from tqdm import tqdm
 import transformers
 from transformers import AutoModel, AutoTokenizer, AutoConfig
-from retriever.eval import eval_retrieval_from_file
+# changedthis
+# from retriever.eval import eval_retrieval_from_file
 from model import RetrievalModel
 TQDM_DISABLED = os.environ['TQDM_DISABLED'] if 'TQDM_DISABLED' in os.environ else False
+
+# changedthis
+TOP_K = [1, 3, 5, 8, 10, 12, 15, 20, 30, 50, 100, 200]
+
+# changedthis
+def eval_retrieval_from_file(data_file, retrieval_file,
+                             oracle_entry='oracle_man', retrieval_entry='retrieved', top_k=None):
+
+    assert 'oracle_man.full' in data_file or 'conala' not in data_file, (data_file)
+    # for conala
+    with open(data_file, "r") as f:
+        d = json.load(f)
+    gold = [item[oracle_entry] for item in d]
+
+    with open(retrieval_file, "r") as f:
+        r_d = json.load(f)
+    pred = [r_d[x['question_id']][retrieval_entry] for x in d]
+    metrics = calc_recall(gold, pred, top_k=top_k)
+    return metrics
+
+# changedthis
+def calc_recall(src, pred, print_result=True, top_k=None):
+    top_k = TOP_K if top_k is None else top_k
+    recall_n = {x: 0 for x in top_k}
+    precision_n = {x: 0 for x in top_k}
+
+    for s, p in zip(src, pred):
+        # cmd_name = s['cmd_name']
+        oracle_man = s
+        pred_man = p
+
+        for tk in recall_n.keys():
+            cur_result_vids = pred_man[:tk]
+            cur_hit = sum([x in cur_result_vids for x in oracle_man])
+            # recall_n[tk] += cur_hit / (len(oracle_man) + 1e-10)
+            recall_n[tk] += cur_hit / (len(oracle_man)) if len(oracle_man) else 1
+            precision_n[tk] += cur_hit / tk
+    recall_n = {k: v / len(pred) for k, v in recall_n.items()}
+    precision_n = {k: v / len(pred) for k, v in precision_n.items()}
+
+    if print_result:
+        for k in sorted(recall_n.keys()):
+            print(f"{recall_n[k] :.3f}", end="\t")
+        print()
+        for k in sorted(precision_n.keys()):
+            print(f"{precision_n[k] :.3f}", end="\t")
+        print()
+        for k in sorted(recall_n.keys()):
+            print(f"{2 * precision_n[k] * recall_n[k] / (precision_n[k] + recall_n[k] + 1e-10) :.3f}", end="\t")
+        print()
+
+    return {'recall': recall_n, 'precision': precision_n}
 
 class Dummy:
     pass

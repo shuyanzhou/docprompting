@@ -3,3 +3,7 @@ torch
 faiss-cpu
 transformers==3.0.2
 tensorboard
+six
+sacrebleu
+editdistance
+wandb
